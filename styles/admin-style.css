@@ -1,0 +1,14 @@
+.header__container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1300px;
+    margin: auto;
+    padding: 20px 15px;
+}
+
+.main__article{
+    max-width: 1300px;
+    margin: auto;
+    padding: 20px 15px;
+}
