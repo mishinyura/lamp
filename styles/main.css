@@ -63,7 +63,7 @@ Main section
 */
 
 .main{
-    background-color: #FAF9EB;
+    background-color: var(--bg_color_yellow);
 }
 .products{
     padding-bottom: 150px;
@@ -129,7 +129,94 @@ Main section
 }
 
 
+/* 
+CART PAGE 
+*/
+.order__container{
+    max-width: 1300px;
+    margin: auto;
+    padding: 20px 15px;
+}
+.order__title{
+    font-family: "Montserrat";
+    font-size: 20px;
+    font-weight: 400;
+    font-style: normal;
+}
+.order__content{
+    display: flex;
+}
+.order__list{
+    flex-grow: 1;
+    padding: 10px 20px;
+    background-color: #fff;
+}
+.product{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #ddd;
+}
+.product__name{
+    font-family: "Montserrat";
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+}
+.product__count{
+    font-family: "Montserrat";
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+}
+.product__down{
+    margin-right: 5px;
+    border-right: 1px solid #fff;
+}
+.product__amount{
+    width: 25px;
+    margin-right: 5px;
+    text-align: center;
+    background: none;
+    border: none;
+}
+.product__up{
+    border-left: 1px solid #fff;
+}
+.product__price{
+    font-family: "Montserrat";
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+}
+.product__price::after{
+    content: 'руб.';
+}
+.order__control{
+    flex-basis: 300px;
+}
+.order__total {
+    font-family: "Montserrat";
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+}
+.order__total::before{
+    content: 'Сумма:';
+}
+.order__total::after{
+    content: 'руб.';
+}
 
+
+
+
+
+
+/* 
+FOOTER
+*/
 .footer{
     background-color: #F5F5F5;
 }
