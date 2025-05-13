@@ -4,42 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
+    <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/normalize.css">
     <link rel="stylesheet" href="styles/admin-style.css">
 </head>
-<body>
+<body class="body">
     <header class="header">
         <div class="header__container">
             <a href="/" class="header__logo">
                 My Admin
             </a>
-            <div class="header__btns">
-                <button class="header__btn">
-                    Выйти
-                </button>
-            </div>
-        </div>
-    </header>
-    <main class="main">
-        <aside class="main__aside sidebar">
             <nav class="sidebar__nav mainmenu">
                 <ul class="mainmenu__list">
                     <li class="mainmenu__item">
                         <a href="#" class="mainmenu__link">
-                            Товары
+                            <span class="mainmenu__icon">
+                                <svg width="24" height="24"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 83.373" enable-background="new 0 0 100 83.373" xml:space="preserve">
+                                    <path fill="#fff" d="M83.685,27.454L100,18.392l-3.601-1.946L66.621,0.221L50.215,9.173L33.359,0L0,18.145l3.548,1.999l13.008,7.227L16.4,27.448  h-0.013v0.013l-16.1,8.77l16.1,8.652v21.752l33.607,16.738l33.613-16.738V44.948l16.23-8.717L83.685,27.454z M66.621,5.345  l24.036,13.08l-11.634,6.471l-24.31-13.053L66.621,5.345z M9.323,18.19L33.359,5.11l11.914,6.484L20.951,24.661L9.323,18.19z   M9.727,36.211l11.908-6.504l24.277,13.131l-11.875,6.419L9.727,36.211z M20.892,63.841v-16.53l13.184,7.083l13.672-7.591v30.41  L20.892,63.841z M79.114,63.841L52.259,77.207V46.751l13.75,7.643l13.105-7.031V63.841z M90.371,36.198l-24.316,13.06l-11.673-6.419  l24.062-13.131L90.371,36.198z" />
+                                </svg>
+                            </span>
+                            <span class="mainmenu__name">
+                                Товары
+                            </span>
                         </a>
                     </li>
                     <li class="mainmenu__item">
                         <a href="#" class="mainmenu__link">
-                            Заказы
+                            <span class="mainmenu__icon">
+                                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16 1.5a.5.5 0 0 1 .5.5v.5H18a1.5 1.5 0 0 1 1.493 1.356L19.5 4v16a1.5 1.5 0 0 1-1.356 1.493L18 21.5H6a1.5 1.5 0 0 1-1.493-1.356L4.5 20V4a1.5 1.5 0 0 1 1.356-1.493L6 2.5h1.5V2a.5.5 0 0 1 .41-.492L8 1.5zm-8.5 2H6a.5.5 0 0 0-.492.41L5.5 4v16a.5.5 0 0 0 .41.492L6 20.5h12a.5.5 0 0 0 .492-.41L18.5 20V4a.5.5 0 0 0-.41-.492L18 3.5h-1.5V4a.5.5 0 0 1-.41.492L16 4.5H8a.5.5 0 0 1-.5-.5v-.5zm9 12.5a.5.5 0 1 1 0 1h-9a.5.5 0 1 1 0-1h9zm0-4a.5.5 0 1 1 0 1h-9a.5.5 0 1 1 0-1h9zm0-4a.5.5 0 1 1 0 1h-9a.5.5 0 0 1 0-1h9zm-1-5.5h-7v1h7v-1z" fill="#fff"/>
+                                </svg>
+                            </span>
+                            <span class="mainmenu__name">
+                                Заказы
+                            </span>
                         </a>
                     </li>
                 </ul>
             </nav>
-        </aside>
-        <article class="main__article">
-            <section class="main__section">
-
+        </div>
+    </header>
+    <main class="main">
+        <article class="main__container">
+            <section class="main__section controls">
+                <button class="controls__burger">
+                    <span></span>
+                </button>
+                <ul class="controls__btns">
+                    <li class="controls__item">
+                        <a href="#" class="controls__btn">
+                            Добавить
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            <section class="main__section cards">
+                <div class="cards__container">
+                    <ul class="cards__list">
+                        <li class="cards__item">
+                            <a href="#" class="cards__name">
+                                Светодиодная лампа КОСМОС LED A60 11Вт 220В E27 4500К 441266 LkecLED11wA60E2745
+                            </a>
+                            <a href="#" class="cards__btn cards__btn_edit">
+                                Редактировать
+                            </a>
+                            <a href="#" class="cards__btn cards__btn_delete">
+                                Удалить
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </section>
         </article>
     </main>

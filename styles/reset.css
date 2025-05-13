@@ -1,0 +1,28 @@
+:root{
+    --bg_color_blue: #290088;
+
+    --text_color_white: #fff;
+
+    --btn_border_blue: #290088;
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6{
+    padding: 0;
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+button{
+    background: none;
+    border: none;
+}

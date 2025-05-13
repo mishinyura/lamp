@@ -1,3 +1,92 @@
+.body{
+    display: flex;
+}
+.header{
+    position: sticky;
+    top: 0;
+    flex-basis: 250px;
+    height: 100vh;
+    margin-right: 20px;
+    background-color: var(--bg_color_blue);
+}
+
+.header__logo{
+    display: block;
+    padding: 20px 0;
+    margin-bottom: 40px;
+    text-align: center;
+    color: var(--text_color_white);
+}
+.mainmenu__item:not(:last-child){
+    margin-bottom: 5px;
+}
+.mainmenu__link{
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    color: var(--text_color_white);
+}
+.mainmenu__link:hover{
+    background-color: rgba(255, 255, 255, 0.329);
+}
+.mainmenu__icon{
+    margin-right: 10px;
+}
+
+
+
+.main{
+    flex-grow: 1;
+}
+.controls{
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+.controls__burger{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--btn_border_blue);
+    border-radius: 2px;
+    border-top-left-radius: 10px;
+}
+.controls__burger::before{
+    position: absolute;
+    top: 27%;
+    left: 6px;
+    width: 60%;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--btn_border_blue);
+    content: '';
+}
+.controls__burger::after{
+    position: absolute;
+    bottom: 25%;
+    left: 6px;
+    width: 60%;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--btn_border_blue);
+    content: '';
+}
+.controls__burger span{
+    position: absolute;
+    top: 48%;
+    left: 6px;
+    width: 60%;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--btn_border_blue);
+    content: '';
+}
+.controls
+/* .header{
+    background-color: var(--bg_color_black);
+}
 .header__container{
     display: flex;
     justify-content: space-between;
@@ -6,9 +95,45 @@
     margin: auto;
     padding: 20px 15px;
 }
+.header__logo{
+    color: var(--text_color_white);
+}
+.header__btn{
+    color: var(--text_color_white);
+}
 
-.main__article{
+.main{
+    display: flex;
+    align-items: start;
     max-width: 1300px;
     margin: auto;
-    padding: 20px 15px;
+    padding: 0 15px;
 }
+.sidebar{
+    flex-basis: 250px;
+    background-color: var(--bg_color_black);
+}
+.mainmenu__list{
+    padding: 30px;
+}
+.mainmenu__link{
+    color: var(--text_color_white);
+}
+.main__article{
+   flex-grow: 1;
+}
+.cards__item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.cards__btn{
+    padding: 10px 20px;
+    color: #fff;
+}
+.cards__btn_edit{
+    background-color: rgb(0, 0, 153);
+}
+.cards__btn_delete{
+    background-color: rgb(179, 0, 0);
+} */
