@@ -7,12 +7,19 @@
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/normalize.css">
     <link rel="stylesheet" href="styles/admin-style.css">
+    <script src="scripts/app.js" defer></script>
 </head>
 <body class="body">
-    <header class="header">
+    <header class="header header_open">
         <div class="header__container">
+            <button class="header__burger">
+                <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 16 16">
+                    <path fill="#fff" d="M11 6.5v-5.5h1v-1h-8v1h1v5.5c0 0-2 1.5-2 3.5 0 0.5 1.9 0.7 4 0.7v2.2c0 0.7 0.2 1.4 0.5 2.1l0.5 1 0.5-1c0.3-0.6 0.5-1.3 0.5-2.1v-2.2c2.1 0 4-0.3 4-0.7 0-2-2-3.5-2-3.5zM7 6.6c0 0-0.5 0.3-1.6 1.4-1 1-1.5 1.9-1.5 1.9s0.1-1 0.8-1.9c0.9-1.1 1.3-1.4 1.3-1.4v-5.6h1v5.6z"></path>
+                </svg>
+            </button>
             <a href="/" class="header__logo">
-                My Admin
+                ADM
             </a>
             <nav class="sidebar__nav mainmenu">
                 <ul class="mainmenu__list">
@@ -47,9 +54,6 @@
     <main class="main">
         <article class="main__container">
             <section class="main__section controls">
-                <button class="controls__burger">
-                    <span></span>
-                </button>
                 <ul class="controls__btns">
                     <li class="controls__item">
                         <a href="#" class="controls__btn">
@@ -62,15 +66,40 @@
                 <div class="cards__container">
                     <ul class="cards__list">
                         <li class="cards__item">
-                            <a href="#" class="cards__name">
-                                Светодиодная лампа КОСМОС LED A60 11Вт 220В E27 4500К 441266 LkecLED11wA60E2745
-                            </a>
-                            <a href="#" class="cards__btn cards__btn_edit">
-                                Редактировать
-                            </a>
-                            <a href="#" class="cards__btn cards__btn_delete">
-                                Удалить
-                            </a>
+                            <div class="cards__info">
+                                <a href="#" class="cards__article">
+                                    FF0012290
+                                </a>
+                                <span class="cards__name">
+                                    Светодиодная лампа КОСМОС LED A60 11Вт 220В
+                                </span>
+                            </div>
+                            <div class="cards__control">
+                                <a href="#" class="cards__btn cards__btn_edit">
+                                    Редактировать
+                                </a>
+                                <a href="#" class="cards__btn cards__btn_delete">
+                                    Удалить
+                                </a>
+                            </div>
+                        </li>
+                        <li class="cards__item">
+                            <div class="cards__info">
+                                <a href="#" class="cards__article">
+                                    FF0012290
+                                </a>
+                                <span class="cards__name">
+                                    Светодиодная лампа ВЕНЕРА LED 10Вт 220В
+                                </span>
+                            </div>
+                            <div class="cards__control">
+                                <a href="#" class="cards__btn cards__btn_edit">
+                                    Редактировать
+                                </a>
+                                <a href="#" class="cards__btn cards__btn_delete">
+                                    Удалить
+                                </a>
+                            </div>
                         </li>
                     </ul>
                 </div>

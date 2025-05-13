@@ -4,6 +4,8 @@
     --text_color_white: #fff;
 
     --btn_border_blue: #290088;
+
+    --link_color_blue: #11a0ff;
 }
 
 ul{
@@ -25,4 +27,5 @@ a{
 button{
     background: none;
     border: none;
+    cursor: pointer;
 }
