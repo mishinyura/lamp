@@ -1,17 +1,23 @@
 const pageName = document.querySelector('meta[name="pagename"]').content;
 
-let burgerBtn,
-header,
-addBtnCartPosition,
-amountCartPosition,
-delBtnCartPosition,
+let burgerBtn, //Кнопка закрепить меню
+header, //Основной header
+addBtnCartPosition, //Кнопка увеличения объма товара в корзине
+amountCartPosition, //Инпут количества товара в корзине
+delBtnCartPosition, //Кнопка уменьшения объма товара в корзине
+productsInOrder, //Товары в корзине
 amountProducts,
 amountProduct,
 mainTotal,
 productTotal;
 
+function print(data) {
+    console.log(data)
+}
+
 const upProduct = () => {
     amountProduct = Number(amountCartPosition.value);
+    productTotal = Number()
     permission = true //Тут будет запрос к серверу на наличие такого количества
     if (permission && amountCartPosition.value < 99) {
         amountCartPosition.value = amountProduct + 1
@@ -29,8 +35,10 @@ const downProduct = () => {
     }
 }
 
-const delProduct = () => {
-    
+const delProduct = (elem) => {
+    let product = elem.target
+    product.parentNode.remove()
+    console.dir(product)
 }
 
 const editStateMainMenu = () => {
@@ -39,17 +47,25 @@ const editStateMainMenu = () => {
 }
 
 
+const indexInit = () => {
+    addBtnCartPosition = document.querySelector('.cards__add');
+
+    addBtnCartPosition.addEventListener('click', upProduct)
+}
+
+
 const cartInit = () => {
     addBtnCartPosition = document.querySelector('.product__up');
     amountCartPosition = document.querySelector('.product__amount');
     delBtnCartPosition = document.querySelector('.product__down');
-
-    
-    productTotal = Number()
-
+    productsInOrder = document.querySelectorAll('.product');
 
     addBtnCartPosition.addEventListener('click', upProduct)
     delBtnCartPosition.addEventListener('click', downProduct)
+
+    for (let prod of productsInOrder) {
+        prod.addEventListener('click', delProduct)
+    }
 }
 
 const adminInit = () => {

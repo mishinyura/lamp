@@ -8,7 +8,7 @@
 
     --link_color_blue: #11a0ff;
 
-
+    --btn_bg_yellow: linear-gradient(to right bottom, #DBA916 10%, #A67F09 90%);
 }
 
 ul{
@@ -31,4 +31,8 @@ button{
     background: none;
     border: none;
     cursor: pointer;
+}
+
+svg, path{
+    pointer-events: none;
 }

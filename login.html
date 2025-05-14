@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="pagename" content="cart">
-    <title>Корзина</title>
+    <title>Авторизация</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -12,7 +11,6 @@
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/normalize.css">
     <link rel="stylesheet" href="styles/main.css">
-    <script src="scripts/app.js" defer></script>
 </head>
 <body>
     <header class="header">
@@ -50,58 +48,17 @@
         </div>
     </header>
     <main class="main">
-        <section class="main__section order">
-            <div class="order__container">
-                <h2 class="order__title">
-                    Корзина
+        <section class="main__section auth">
+            <div class="auth__container">
+                <h2 class="auth__title">
+                    Авторизация
                 </h2>
-                <form class="order__content" action="/" method="post">
-                    <ul class="order__list">
-                        <li class="order__item product">
-                            <span class="product__name">
-                                Светодиодная лампа ВЕНЕРА LED 10Вт 220В
-                            </span>
-                            <div class="product__count">
-                                <button class="product__down" type="button">-</button>
-                                <input class="product__amount" value="1" name="product_amount"/>
-                                <button class="product__up" type="button">+</button>
-                            </div>
-                            <span class="product__price">
-                                500
-                            </span>
-                            <button class="product__del" type="button">
-                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.0023 8.33175H25.0023V11.6651H15.0023V8.33175ZM28.3356 8.33175V9.99841C28.4512 11.2199 28.8429 11.5562 30.0023 11.6651H33.3356V14.9984H28.3356H11.6689H6.66895V11.6651H10.0023C11.2237 11.5495 11.5601 11.1578 11.6689 9.99841L11.6689 8.33175L15.0023 4.99841H25.0023L28.3356 8.33175ZM11.6689 31.6651V18.3317H8.33561L8.33561 31.6651L11.6689 34.9984H28.3356L31.6689 31.6651V18.3317H28.3356V31.6651H11.6689ZM15.0023 26.6651V18.3317H18.3356V26.6651H15.0023ZM21.6689 18.3317V26.6651H25.0023V18.3317H21.6689Z" fill="white"/>
-                                </svg>                                
-                            </button>
-                        </li>
-                        <li class="order__item product">
-                            <span class="product__name">
-                                Светодиодная лампа ВЕНЕРА LED 10Вт 220В
-                            </span>
-                            <div class="product__count">
-                                <button class="product__down" type="button">-</button>
-                                <input class="product__amount" value="1" name="product_amount"/>
-                                <button class="product__up" type="button">+</button>
-                            </div>
-                            <span class="product__price">
-                                500
-                            </span>
-                            <button class="product__del" type="button">
-                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.0023 8.33175H25.0023V11.6651H15.0023V8.33175ZM28.3356 8.33175V9.99841C28.4512 11.2199 28.8429 11.5562 30.0023 11.6651H33.3356V14.9984H28.3356H11.6689H6.66895V11.6651H10.0023C11.2237 11.5495 11.5601 11.1578 11.6689 9.99841L11.6689 8.33175L15.0023 4.99841H25.0023L28.3356 8.33175ZM11.6689 31.6651V18.3317H8.33561L8.33561 31.6651L11.6689 34.9984H28.3356L31.6689 31.6651V18.3317H28.3356V31.6651H11.6689ZM15.0023 26.6651V18.3317H18.3356V26.6651H15.0023ZM21.6689 18.3317V26.6651H25.0023V18.3317H21.6689Z" fill="white"/>
-                                </svg>                                
-                            </button>
-                        </li>
-                    </ul>
-                    <div class="order__control">
-                        <div class="order__total">
-                            1000
-                        </div>
-                        <button class="order__submit" type="submit">
-                            Оформить заказ
-                        </button>
-                    </div>
+                <form action="/" method="post" class="auth__form">
+                    <input class="auth__input" type="text" placeholder="E-mail">
+                    <input class="auth__input" type="password" placeholder="Пароль">
+                    <button class="auth__btn" type="submit">
+                        Войти
+                    </button>
                 </form>
             </div>
         </section>
