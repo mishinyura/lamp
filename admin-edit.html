@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="pagename" content="admin">
-    <title>ADM</title>
+    <title>Редактирование</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -77,62 +77,63 @@
             <ul class="controls__btns">
                 <li class="controls__item">
                     <a href="#" class="controls__btn">
-                        Добавить
+                        Сохранить
                     </a>
                 </li>
             </ul>
         </aside>
-        <article class="main__container">
-            <section class="main__section cards">
-                <div class="cards__container">
-                    <ul class="cards__list">
-                        <li class="cards__item">
-                            <div class="cards__info">
-                                <a href="#" class="cards__article">
-                                    FF0012290
-                                </a>
-                                <span class="cards__name">
-                                    Светодиодная лампа КОСМОС LED A60 11Вт 220В
-                                </span>
-                            </div>
-                            <div class="cards__control">
-                                <a href="#" class="cards__btn cards__btn_edit">
-                                    <span class="cards__text">
-                                        Редактировать
-                                    </span>
-                                </a>
-                                <a href="#" class="cards__btn cards__btn_delete">
-                                    <span class="cards__text">
-                                        Удалить
-                                    </span>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="cards__item">
-                            <div class="cards__info">
-                                <a href="#" class="cards__article">
-                                    FF0012290
-                                </a>
-                                <span class="cards__name">
-                                    Светодиодная лампа ВЕНЕРА LED 10Вт 220В
-                                </span>
-                            </div>
-                            <div class="cards__control">
-                                <a href="#" class="cards__btn cards__btn_edit">
-                                    <span class="cards__text">
-                                        Редактировать
-                                    </span>
-                                </a>
-                                <a href="#" class="cards__btn cards__btn_delete">
-                                    <span class="cards__text">
-                                        Удалить
-                                    </span>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </section>
+        <article class="main__container edit">
+            <div class="edit__container">
+                <h2 class="edit__title">
+                    Редактирование товара
+                </h2>
+                <form action="/" method="put" class="edit__form">
+                    <div class="edit__inputs">
+                        <label class="edit__label">
+                            <span class="edit__fieldname">
+                                Артикул
+                            </span>
+                            <input class="edit__value" type="text" value="FF120394">
+                        </label>
+                        <label class="edit__label">
+                            <span class="edit__fieldname">
+                                Наименование
+                            </span>
+                            <input class="edit__value" type="text" value="Светодиодная лампа">
+                        </label>
+                        <label class="edit__label">
+                            <span class="edit__fieldname">
+                                Описание
+                            </span>
+                            <textarea class="edit__value" rows="5">КОСМОС LED A60 11Вт 220В</textarea>
+                        </label>
+                        <label class="edit__label">
+                            <span class="edit__fieldname">
+                                Категория
+                            </span>
+                            <input class="edit__value" type="text" value="LED">
+                        </label>
+                        <label class="edit__label">
+                            <span class="edit__fieldname">
+                                Цена
+                            </span>
+                            <input class="edit__value" type="number" step="0.01" min="0" value="1000.00" placeholder="0,00">
+                        </label>
+                        <label class="edit__label">
+                            <span class="edit__fieldname">
+                                Количество на складе
+                            </span>
+                            <input class="edit__value" type="number" value="1" min="0">
+                        </label>
+                        <label class="edit__label">
+                            <span class="edit__fieldname">
+                                Изображение
+                            </span>
+                            <input class="edit__value" type="file" accept="image/png, image/jpeg" multiple>
+                        </label>
+                    </div>
+                </form>
+            </div>
         </article>
     </main>
 </body>

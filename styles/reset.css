@@ -32,7 +32,9 @@ button{
     border: none;
     cursor: pointer;
 }
-
+label{
+    cursor: pointer;
+}
 svg, path{
     pointer-events: none;
 }

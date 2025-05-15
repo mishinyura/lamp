@@ -167,6 +167,22 @@
 }
 
 
+
+/* 
+EDIT ADMIN PAGE
+*/
+.edit__label{
+    display: flex;
+    align-items: center;
+}
+.edit__label:not(:last-child){
+    margin-bottom: 10px;
+}
+.edit__fieldname{
+    flex-basis: 200px;
+}
+
+
 @media screen and (max-width: 1300px) {
     .cards__text{
         display: none;
