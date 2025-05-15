@@ -10,6 +10,7 @@ amountProducts,
 amountProduct,
 mainTotal,
 productTotal;
+let menuContainer;
 
 let orderBtn;
 let openModalNow;
@@ -64,6 +65,10 @@ const openModal = (btn) => {
 
 }
 
+const editMenu = () => {
+    menuContainer.classList.toggle('show')
+}
+
 
 
 const editStateMainMenu = () => {
@@ -73,9 +78,12 @@ const editStateMainMenu = () => {
 
 
 const indexInit = () => {
-    addBtnCartPosition = document.querySelector('.cards__add');
+    // addBtnCartPosition = document.querySelector('.cards__add');
+    burgerBtn = document.querySelector('.menu__burger');
+    menuContainer = document.querySelector('.menu__list');
 
-    addBtnCartPosition.addEventListener('click', upProduct)
+    // addBtnCartPosition.addEventListener('click', upProduct)
+    burgerBtn.addEventListener('click', editMenu)
 }
 
 
@@ -106,7 +114,8 @@ const adminInit = () => {
 
 startData = {
     'cart': cartInit,
-    'admin': adminInit
+    'admin': adminInit,
+    'index': indexInit
 }
 
 startData[pageName]()

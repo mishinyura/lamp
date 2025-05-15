@@ -1,5 +1,5 @@
 .header{
-    background-color: #010000;
+    background-color: var(--bg_color_black);
 }
 .header__container{
     display: flex;
@@ -15,7 +15,40 @@
     color: #fff;
 }
 .menu{
+    position: relative;
     flex-grow: 1;
+}
+.menu__burger{
+    position: relative;
+    display: none;
+    width: 25px;
+    height: 25px;
+}
+.menu__burger::before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 2px;
+    background-color: #fff;
+    content: '';
+}
+.menu__burger span{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 80%;
+    height: 2px;
+    background-color: #fff;
+}
+.menu__burger::after{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80%;
+    height: 2px;
+    background-color: #fff;
+    content: '';
 }
 .menu__list{
     display: flex;
@@ -27,6 +60,10 @@
     margin-right: 20px;
 }
 .menu__link{
+    font-family: "Montserrat";
+    font-size: 20px;
+    font-weight: 400;
+    font-style: normal;
     text-decoration: none;
     color: #fff;
 }
@@ -91,7 +128,6 @@ Main section
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    
     padding: 0;
     margin: 0;
     list-style: none;
@@ -100,7 +136,6 @@ Main section
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 250px;
     padding: 20px;
     border: 1px solid transparent;
     border-image: linear-gradient(to left top,#DBA916 10%,  transparent 30%, #A67F09 90%);
@@ -360,4 +395,56 @@ FOOTER
     background-color: #010000;
     content: '';
     transform: rotate(45deg);
+}
+
+
+
+@media screen and (max-width: 1000px) {
+    .cards{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media screen and (max-width: 562px) {
+    .header__logo{
+        order: 1;
+    }
+    .menu{
+        order: 0;
+        flex-grow: 0;
+    }
+    .menu__list{
+        position: absolute;
+        top: -26px;
+        left: -400px;
+        flex-direction: column;
+        width: 320px;
+        height: 100vh;
+        padding: 120px 20px;
+        background-color: var(--bg_color_black);
+        z-index: 10;
+        transition: left .3s cubic-bezier(0.87, 0, 0.13, 1);;
+    }
+    .menu__list.show{
+        left: -15px;
+    }
+    .menu__item:not(:last-child){
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    .header__control{
+        order: 2;
+    }
+    .menu__burger{
+        display: block;
+        z-index: 100;
+    }
+    .cards{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .footerbar__sections{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

@@ -1,4 +1,5 @@
 :root{
+    --bg_color_black: #010000;
     --bg_color_blue: #290088;
     --bg_color_yellow: #FAF9EB;
 
@@ -9,6 +10,10 @@
     --link_color_blue: #11a0ff;
 
     --btn_bg_yellow: linear-gradient(to right bottom, #DBA916 10%, #A67F09 90%);
+}
+.body{
+    min-width: 320px;
+    overflow-x: hidden;
 }
 
 ul{
