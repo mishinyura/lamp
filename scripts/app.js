@@ -11,6 +11,11 @@ amountProduct,
 mainTotal,
 productTotal;
 
+let orderBtn;
+let openModalNow;
+
+let modals = document.querySelectorAll('.modals__modal');
+
 function print(data) {
     console.log(data)
 }
@@ -41,6 +46,26 @@ const delProduct = (elem) => {
     console.dir(product)
 }
 
+const closeModal = () => {
+    openModalNow.classList.remove('show')
+    openModalNow.parentElement.classList.remove('show')
+    openModalNow = null
+}
+
+const openModal = (btn) => {
+    for (let modal of modals) {
+        if (modal.getAttribute('name') === btn.target.getAttribute('name')) {
+            modal.classList.add('show')
+            modal.parentElement.classList.add('show')
+            openModalNow = modal
+            modal.querySelector('.btn-close').addEventListener('click', closeModal)
+        }
+    }
+
+}
+
+
+
 const editStateMainMenu = () => {
     header.classList.toggle('header_close')
     header.classList.toggle('header_open')
@@ -59,9 +84,12 @@ const cartInit = () => {
     amountCartPosition = document.querySelector('.product__amount');
     delBtnCartPosition = document.querySelector('.product__down');
     productsInOrder = document.querySelectorAll('.product');
+    orderBtn = document.querySelector('.order__btn');
 
     addBtnCartPosition.addEventListener('click', upProduct)
     delBtnCartPosition.addEventListener('click', downProduct)
+
+    orderBtn.addEventListener('click', openModal)
 
     for (let prod of productsInOrder) {
         prod.addEventListener('click', delProduct)

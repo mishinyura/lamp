@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <script src="scripts/app.js" defer></script>
 </head>
-<body>
+<body class="body">
     <header class="header">
         <div class="header__container">
             <a href="/" class="header__logo">
@@ -55,7 +55,7 @@
                 <h2 class="order__title">
                     Корзина
                 </h2>
-                <form class="order__content" action="/" method="post">
+                <div class="order__content">
                     <ul class="order__list">
                         <li class="order__item product">
                             <span class="product__name">
@@ -98,11 +98,11 @@
                         <div class="order__total">
                             1000
                         </div>
-                        <button class="order__submit" type="submit">
+                        <button class="order__btn" type="button" name="order">
                             Оформить заказ
                         </button>
                     </div>
-                </form>
+                </div>
             </div>
         </section>
     </main>
@@ -192,5 +192,22 @@
             </div>
         </div>
     </footer>
+    <article class="modals">
+        <section class="modals__modal ordermod" name="order">
+            <div class="ordermod__container">
+                <button class="ordermod__close btn-close"></button>
+                <h3 class="ordermode__title">
+                    Оформление заказа
+                </h3>
+                <form action="/" method="post">
+                    <input type="text" placeholder="Имя">
+                    <input type="tel" placeholder="Телефон">
+                    <button class="ordermode__submit" type="submit">
+                        Отправить
+                    </button>
+                </form>
+            </div>
+        </section>
+    </article>
 </body>
 </html>
