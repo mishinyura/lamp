@@ -171,6 +171,13 @@
 /* 
 EDIT ADMIN PAGE
 */
+.edit__title{
+    margin-bottom: 30px;
+    font-family: "Montserrat";
+    font-size: 18px;
+    font-weight: 600;
+    font-style: normal;
+}
 .edit__label{
     display: flex;
     align-items: center;
@@ -180,6 +187,16 @@ EDIT ADMIN PAGE
 }
 .edit__fieldname{
     flex-basis: 200px;
+    font-family: "Montserrat";
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+}
+.edit__value{
+    font-family: "Montserrat";
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
 }
 
 
