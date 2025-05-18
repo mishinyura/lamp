@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "lamp"
+version = "0.1.0"
+description = ""
+authors = ["yuramishin <robothot@yandex.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.12"
+dynaconf = "^3.2.11"
+sqlalchemy = "^2.0.41"
+pydantic = "^2.11.4"
+asyncpg = "^0.30.0"
+uvicorn = "^0.34.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

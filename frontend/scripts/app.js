@@ -12,6 +12,8 @@ mainTotal,
 productTotal;
 let menuContainer;
 
+let addProductInCartBtns;
+
 let orderBtn;
 let openModalNow;
 
@@ -71,6 +73,16 @@ const editMenu = () => {
 
 
 
+
+
+const editViewAddBtn = (btn) => {
+    btn.target.classList.toggle('show')
+    let newBtn = btn.target.nextElementSibling
+    newBtn.classList.toggle('show')    
+}
+
+
+
 const editStateMainMenu = () => {
     header.classList.toggle('header_close')
     header.classList.toggle('header_open')
@@ -81,9 +93,14 @@ const indexInit = () => {
     // addBtnCartPosition = document.querySelector('.cards__add');
     burgerBtn = document.querySelector('.menu__burger');
     menuContainer = document.querySelector('.menu__list');
+    addProductInCartBtns = document.querySelectorAll('.cards__add')
 
     // addBtnCartPosition.addEventListener('click', upProduct)
     burgerBtn.addEventListener('click', editMenu)
+
+    for (let btn of addProductInCartBtns) {
+        btn.addEventListener('click', editViewAddBtn)
+    }
 }
 
 

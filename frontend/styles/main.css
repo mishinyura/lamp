@@ -157,11 +157,36 @@ Main section
 .cards__price{
     margin-bottom: 10px;
 }
+.cards__count{
+    display: none;
+    font-family: "Montserrat";
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+}
+.cards__down{
+    margin-right: 5px;
+    border-right: 1px solid #fff;
+}
+.cards__amount{
+    width: 25px;
+    margin-right: 5px;
+    text-align: center;
+    background: none;
+    border: none;
+}
 .cards__add{
+    display: none;
     padding: 6px 13px;
     border: none;
     border-radius: 20px;
     background: var(--btn_bg_yellow);
+}
+.cards__add.show{
+    display: block;
+}
+.cards__count.show{
+    display: block;
 }
 
 
