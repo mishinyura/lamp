@@ -14,9 +14,8 @@ class OrderCrud(BaseCrud):
 
     async def get_all(self, session: AsyncSession) -> list[OrderSchema]:
         result = await session.execute(select(OrderModel))
-        return [
-            OrderSchema.model_validate(order) for order in result.scalars().all()
-        ]
+        orders = result.scalars().all()
+        return [OrderSchema.model_validate(order) for order in orders]
 
     async def add(self, order: OrderModel, session: AsyncSession) -> None:
         try:

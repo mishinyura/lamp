@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from uuid import UUID
 from decimal import Decimal
 from datetime import datetime
@@ -12,3 +12,5 @@ class OrderSchema(BaseModel):
     status: OrderStatus
     total: Decimal
     created_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
