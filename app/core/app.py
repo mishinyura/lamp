@@ -2,9 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.orders import order_router
+from app.api.products import product_router
 
 ROUTES = {
-    '': order_router
+    '/orders': order_router,
+    '/products': product_router
 }
 
 

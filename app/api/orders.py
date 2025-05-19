@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 import json
-order_router = APIRouter(prefix='/orders')
+order_router = APIRouter()
 
 
 @order_router.get('/')

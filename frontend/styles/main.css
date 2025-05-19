@@ -157,12 +157,25 @@ Main section
 .cards__price{
     margin-bottom: 10px;
 }
+.cards__add{
+    display: none;
+    padding: 6px 13px;
+    border: none;
+    border-radius: 20px;
+    background: var(--btn_bg_yellow);
+}
+.cards__add.show{
+    display: block;
+}
 .cards__count{
     display: none;
     font-family: "Montserrat";
     font-size: 16px;
     font-weight: 400;
     font-style: normal;
+}
+.cards__count.show{
+    display: block;
 }
 .cards__down{
     margin-right: 5px;
@@ -175,19 +188,11 @@ Main section
     background: none;
     border: none;
 }
-.cards__add{
-    display: none;
-    padding: 6px 13px;
-    border: none;
-    border-radius: 20px;
-    background: var(--btn_bg_yellow);
+.cards__up{
+    position: relative;
+    z-index: 1000;
 }
-.cards__add.show{
-    display: block;
-}
-.cards__count.show{
-    display: block;
-}
+
 
 
 /* 

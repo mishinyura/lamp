@@ -135,4 +135,84 @@ startData = {
     'index': indexInit
 }
 
-startData[pageName]()
+// startData[pageName]()
+
+
+class Page{
+    constructor(elements) {
+        this.objects = elements
+        // console.log(elements)
+        // for (let elem in elements) {
+        //     console.log(elements[elem])
+        // }
+        
+        this.doc = document.querySelector('.body')
+    }
+
+    
+}
+
+const page = new Page({
+    data: 'ok'
+});
+
+
+async function editAmountPositionInCard(elem) {
+    let parent = elem.target.closest('li')
+    let counter = parent.querySelector('.cards__count')
+    let amount = counter.querySelector('.cards__amount')
+    let buyBtn = parent.querySelector('.cards__add')
+    let upBtn = counter.querySelector('.cards__up')
+    let downBtn = counter.querySelector('.cards__down')
+
+    if (amount.value == 0) {
+        amount.value = Number(amount.value) + 1
+        amount.setAttribute('value', amount.value)
+        console.log(amount.value)
+
+        buyBtn.classList.remove('show')
+        counter.classList.add('show')
+        upBtn.addEventListener('click', editAmountPositionInCard)
+        downBtn.addEventListener('click', editAmountPositionInCard)
+
+    } else {
+        if (elem.target.classList.contains('cards__down')) {
+            if (amount.value > 1) {
+                amount.value = Number(amount.value) - 1
+                amount.setAttribute('value', amount.value)
+            } else {
+                buyBtn.classList.add('show')
+                counter.classList.remove('show')
+
+                amount.value = 0
+                amount.setAttribute('value', amount.value)
+
+                upBtn.removeEventListener('click', editAmountPositionInCard)
+                downBtn.removeEventListener('click', editAmountPositionInCard)
+            }
+        } else if(elem.target.classList.contains('cards__up')) {
+            let permission = await request(
+                `http://localhost:8000/products/${parent.dataset.article}/check`
+            )
+
+            if (permission) {
+                amount.value = Number(amount.value) + 1
+                amount.setAttribute('value', amount.value)
+            }
+        }
+        
+    }
+}
+
+
+async function main() {
+    // console.log(page.doc.querySelectorAll('.cards__add'))
+
+    for (let btn of page.doc.querySelectorAll('.cards__add')) {
+        
+
+        btn.addEventListener('click', editAmountPositionInCard)
+    }
+}
+
+main()

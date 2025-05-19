@@ -21,8 +21,6 @@ async function request(path='/', method='GET', data={}) {
 
 // Вызов функции
 async function main() {
-    let data = await request('http://localhost:8000/orders')
-    console.log(data)
 }
 
 main()

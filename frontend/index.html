@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="styles/normalize.css">
     <link rel="stylesheet" href="styles/main.css">
     <script src="scripts/app.js" defer></script>
-    <script src="scripts/modules.js"></script>
+    <script src="scripts/modules.js" defer></script>
 </head>
-<body>
+<body class="body">
     <header class="header">
         <div class="header__container">
             <a href="/" class="header__logo">
@@ -60,7 +60,7 @@
                     Товары
                 </h2>
                 <ul class="products__list cards">
-                    <li class="cards__item">
+                    <li class="cards__item" data-article="FF235412">
                         <div class="card__image">
                             <img src="#" alt="">
                         </div>
@@ -75,7 +75,26 @@
                         </button>
                         <div class="cards__count">
                             <button class="cards__down" type="button">-</button>
-                            <input class="cards__amount" value="1" name="product_amount"/>
+                            <input class="cards__amount" value="0" name="product_amount"/>
+                            <button class="cards__up" type="button">+</button>
+                        </div>
+                    </li>
+                    <li class="cards__item" data-article="FF255412">
+                        <div class="card__image">
+                            <img src="#" alt="">
+                        </div>
+                        <h3 class="cards__title">
+                            Трансформатор медицинский разделительный ТРТ-100000М-IP54
+                        </h3>
+                        <span class="cards__price">
+                            100 p.
+                        </span>
+                        <button class="cards__add show">
+                            Купить
+                        </button>
+                        <div class="cards__count">
+                            <button class="cards__down" type="button">-</button>
+                            <input class="cards__amount" value="0" name="product_amount"/>
                             <button class="cards__up" type="button">+</button>
                         </div>
                     </li>
