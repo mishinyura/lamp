@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Body
 from fastapi.responses import JSONResponse
 import json
 
@@ -10,9 +10,15 @@ def product_list():
     return JSONResponse(status_code=200, content=json.dumps({"message": "ok"}))
 
 
-@product_router.get('/{product_id}/check')
-def product_list(product_id: str):
-    return True
+@product_router.post('/check')
+async def product_list(request: Request):
+    count = 2
+    data = await request.json()
+    print(data)
+    if int(data['count']) >= count:
+        return False
+    else:
+        return True
 
 
 @product_router.get('/{product_id}')

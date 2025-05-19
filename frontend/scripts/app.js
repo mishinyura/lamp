@@ -164,6 +164,7 @@ async function editAmountPositionInCard(elem) {
     let buyBtn = parent.querySelector('.cards__add')
     let upBtn = counter.querySelector('.cards__up')
     let downBtn = counter.querySelector('.cards__down')
+    let message = page.doc.querySelector('.notifications')
 
     if (amount.value == 0) {
         amount.value = Number(amount.value) + 1
@@ -192,12 +193,23 @@ async function editAmountPositionInCard(elem) {
             }
         } else if(elem.target.classList.contains('cards__up')) {
             let permission = await request(
-                `http://localhost:8000/products/${parent.dataset.article}/check`
+                `http://localhost:8000/products/check`,
+                'POST',
+                {
+                    article: parent.dataset.article,
+                    count: amount.value
+                }
             )
 
             if (permission) {
                 amount.value = Number(amount.value) + 1
                 amount.setAttribute('value', amount.value)
+            } else {
+                message.classList.add('show')
+                setTimeout(() => {
+                    message.classList.remove('show')
+                }, 5000);
+                
             }
         }
         
@@ -209,8 +221,6 @@ async function main() {
     // console.log(page.doc.querySelectorAll('.cards__add'))
 
     for (let btn of page.doc.querySelectorAll('.cards__add')) {
-        
-
         btn.addEventListener('click', editAmountPositionInCard)
     }
 }

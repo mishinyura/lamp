@@ -1,3 +1,35 @@
+.notifications{
+    position: fixed;
+    top: 0;
+    right: -300px;
+    max-width: 200px;
+    border: 1px solid rgb(115, 0, 0);
+    background-color: rgba(223, 39, 39, 0.952);
+    z-index: 100000;
+    transition: right .1s linear;
+}
+.notifications.show{
+    right: 0;
+}
+.notifications__container{
+    padding: 10px 20px;
+}
+.notifications__title{
+    margin-bottom: 8px;
+    font-family: "Montserrat";
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+}
+.notifications__descr{
+    font-family: "Montserrat";
+    font-size: 12px;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+
 .header{
     background-color: var(--bg_color_black);
 }

@@ -1,11 +1,11 @@
-async function request(path='/', method='GET', data={}) {
+async function request(path='/', method='GET', body={}) {
   try {
     setting = {
         method: method
     }
 
     if (method === 'POST') {
-        setting.data = data
+        setting.body = JSON.stringify(body)
     }
     const response = await fetch(path, setting);
     
