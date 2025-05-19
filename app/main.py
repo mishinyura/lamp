@@ -3,7 +3,6 @@ import asyncio
 
 from app.core.config import settings
 from app.core.app import get_app
-from app.core.config import settings
 from app.core.db import create_tables
 
 
