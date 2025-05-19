@@ -7,7 +7,7 @@ from app.core.db import create_tables
 
 
 if __name__ == '__main__':
-    asyncio.run(create_tables())
+    # asyncio.run(create_tables())
     app = get_app()
     app.mount(settings.app.app_mount, app)
 
