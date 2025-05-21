@@ -43,7 +43,7 @@ class ProductCRUD(BaseCrud, ABC):
         pass
 
     @classmethod
-    async def get_by_article(cls, product_article: int, session: AsyncSession):
+    async def get_by_article(cls, product_article: str, session: AsyncSession) -> ProductSchema | None:
         result = await session.execute(select(ProductModel).where(ProductModel.article == product_article))
         product = result.scalar_one_or_none()
         return ProductSchema.model_validate(product)

@@ -2,7 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 
 from app.database import product_crud
-from app.schemas import ProductSchema, ProductCreateSchema
+from app.schemas import ProductSchema, ProductCreateSchema, ProductAddCartSchema
 from app.models import ProductModel
 from app.core.exceptions import SqlException, DuplicateException
 
@@ -44,6 +44,15 @@ class ProductService:
         )
 
         return total
+
+    async def check_availability_product(
+            self, product_data: ProductAddCartSchema, session: AsyncSession
+    ) -> bool:
+        product = await self.crud.get_by_article(product_article=product_data.article, session=session)
+        if product.stock >= product_data.amount:
+            return True
+        else:
+            return False
 
 
 product_service = ProductService()

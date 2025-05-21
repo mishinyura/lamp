@@ -6,9 +6,9 @@ async function request(path='/', method='GET', body={}) {
 
     if (method === 'POST') {
         setting.body = JSON.stringify(body)
+        setting.headers = {'Content-Type': 'application/json'}
     }
     const response = await fetch(path, setting);
-    
     if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
     }

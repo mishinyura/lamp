@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Request, Body, Depends
 from fastapi.responses import JSONResponse, Response
-from starlette.status import HTTP_201_CREATED, HTTP_404_NOT_FOUND, HTTP_409_CONFLICT
+from starlette.status import HTTP_201_CREATED, HTTP_404_NOT_FOUND, HTTP_409_CONFLICT, HTTP_200_OK
 from sqlalchemy.ext.asyncio import AsyncSession
 import json
 
-from app.schemas import ProductSchema, ProductCreateSchema
+from app.schemas import ProductSchema, ProductCreateSchema, ProductAddCartSchema
 from app.core.exceptions import DuplicateException
 from app.core.db import get_session
 from app.services import product_service
@@ -31,14 +31,18 @@ async def get_product(order_id: int, session: AsyncSession = Depends(get_session
 
 
 @product_router.post('/check', response_model=bool)
-async def product_availability(request: Request):
-    count = 2
-    data = await request.json()
-    print(data)
-    if int(data['count']) >= count:
-        return False
-    else:
+async def product_availability(
+        product_data: ProductAddCartSchema, session: AsyncSession = Depends(get_session)
+):
+
+    permission = await product_service.check_availability_product(
+        product_data=product_data, session=session
+    )
+
+    if permission:
         return True
+    else:
+        return False
 
 
 @product_router.post('/', response_model=None)

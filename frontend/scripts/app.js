@@ -196,8 +196,8 @@ async function editAmountPositionInCard(elem) {
                 `http://localhost:8000/products/check`,
                 'POST',
                 {
-                    article: parent.dataset.article,
-                    count: amount.value
+                    article: String(parent.dataset.article),
+                    amount: Number(amount.value)
                 }
             )
 
