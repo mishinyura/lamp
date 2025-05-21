@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.orders import order_router
-from app.api.products import product_router
+from app.api import order_router, product_router
 from app.core.config import settings
 from app.core.db import create_tables
 

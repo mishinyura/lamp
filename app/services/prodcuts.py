@@ -1,4 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
+from typing import List
 
 from app.database import product_crud
 from app.schemas import ProductSchema, ProductCreateSchema
@@ -14,7 +15,7 @@ class ProductService:
         product = await self.crud.read(product_id, session)
         return product
 
-    async def get_all_products(self, session: AsyncSession) -> list[ProductSchema]:
+    async def get_all_products(self, session: AsyncSession) -> List[ProductSchema]:
         products = await self.crud.read_all(session=session)
         return products
 
@@ -32,6 +33,17 @@ class ProductService:
             await self.crud.create(product=product, session=session)
         except SqlException as ex:
             raise DuplicateException(message=str(ex))
+
+    async def get_sum_products(self, products: List[dict]) -> float:
+        articles = {product['article']: product['amount'] for product in products}
+        products = self.crud.get_products_in_list(articles.keys())
+
+        total = sum(
+            product.price * articles.get(product.article, 0)
+            for product in products
+        )
+
+        return total
 
 
 product_service = ProductService()

@@ -12,9 +12,6 @@ class BaseCrud(ABC):
     async def read(self, obj_id: int, session: AsyncSession) -> Any: ...
 
     @abstractmethod
-    async def read_all(self, session: AsyncSession) -> list[Any]: ...
-
-    @abstractmethod
     async def update(self, obj_id: int, data: dict, session: AsyncSession) -> None: ...
 
     @abstractmethod

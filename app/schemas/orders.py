@@ -4,11 +4,13 @@ from decimal import Decimal
 from datetime import datetime
 
 from app.core.enums import OrderStatus
+from app.schemas.products import ProductAddCartSchema
+from app.schemas.users import UserCreateSchema
 
 
 class OrderSchema(BaseModel):
     id: int
-    user_id: UUID
+    user_id: int
     status: OrderStatus
     total: Decimal
     created_at: datetime
@@ -17,6 +19,9 @@ class OrderSchema(BaseModel):
 
 
 class OrderCreateSchema(BaseModel):
-    user_id: UUID
-    products: list
-    total: Decimal
+    user: UserCreateSchema
+    products: list[ProductAddCartSchema]
+
+    model_config = {
+        "arbitrary_types_allowed": True
+    }

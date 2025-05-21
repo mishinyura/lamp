@@ -18,3 +18,8 @@ class ProductCreateSchema(BaseModel):
     stock: int
     price: float
     image_url: str
+
+
+class ProductAddCartSchema(BaseModel):
+    article: str
+    amount: int

@@ -1,6 +1,6 @@
 from abc import ABC
 
-from sqlalchemy import select
+from sqlalchemy import select, update, func
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -21,19 +21,47 @@ class ProductCRUD(BaseCrud, ABC):
 
     async def read(self, product_id: int, session: AsyncSession):
         result = await session.execute(select(ProductModel).where(ProductModel.id == product_id))
-        order = result.scalar_one_or_none()
-        return ProductSchema.model_validate(order)
+        product = result.scalar_one_or_none()
+        return ProductSchema.model_validate(product)
 
-    async def read_all(self, session: AsyncSession) -> list[ProductSchema]:
+    async def update(self, product_id: int, data: dict, session: AsyncSession) -> bool:
+        try:
+            result = await session.execute(
+                update(ProductModel)
+                .where(ProductModel.id == product_id)
+                .values(**data)
+                .execution_options(synchronize_session="fetch")
+            )
+            await session.commit()
+            return result.rowcount > 0
+        except SQLAlchemyError:
+            await session.rollback()
+            raise
+
+
+    async def delete(self, obj_id: int, session: AsyncSession) -> None:
+        pass
+
+    @classmethod
+    async def get_by_article(cls, product_article: int, session: AsyncSession):
+        result = await session.execute(select(ProductModel).where(ProductModel.article == product_article))
+        product = result.scalar_one_or_none()
+        return ProductSchema.model_validate(product)
+
+    @classmethod
+    async def read_all(cls, session: AsyncSession) -> list[ProductSchema]:
         result = await session.execute(select(ProductModel))
         products = result.scalars().all()
         return [ProductSchema.model_validate(product) for product in products]
 
-    async def update(self, obj_id: int, data: dict, session: AsyncSession) -> None:
-        pass
+    @classmethod
+    async def get_products_in_list(cls, products: list, session: AsyncSession) -> ProductSchema:
+        result = await session.execute(
+            select(ProductModel).where(ProductModel.article.in_(products))
+        )
 
-    async def delete(self, obj_id: int, session: AsyncSession) -> None:
-        pass
+        products = result.scalars().all()
+        return ProductSchema.model_validate(products)
 
 
 product_crud = ProductCRUD()
