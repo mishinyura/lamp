@@ -150,6 +150,18 @@ const page = new Page({
     data: 'ok'
 });
 
+async function editAmountCountInCart(elem) {
+    let parent = elem.target.closest('li')
+    let counter = parent.querySelector('.cards__count')
+    let amount = counter.querySelector('.cards__amount')
+    let buyBtn = parent.querySelector('.cards__add')
+    let upBtn = counter.querySelector('.cards__up')
+    let downBtn = counter.querySelector('.cards__down')
+    let message = page.doc.querySelector('.notifications')
+
+    if btn.target ==
+}
+
 
 async function editAmountPositionInCard(elem) {
     let parent = elem.target.closest('li')
