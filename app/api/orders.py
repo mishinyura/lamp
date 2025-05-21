@@ -15,13 +15,17 @@ order_router = APIRouter()
 
 @order_router.get('/', response_model=list[OrderSchema])
 async def order_list(session: AsyncSession = Depends(get_session)):
-    # stmt = select(OrderModel)
-    # result = await session.execute(stmt)
-    # orders = result.scalars().all()
     orders = await order_service.get_all_orders(session=session)
     return orders
 
 
 @order_router.get('/{order_id}')
-def order(order_id: int):
-    return order_id
+async def order(order_id: int, session: AsyncSession = Depends(get_session)):
+    order = await order_service.get_order(order_id, session)
+    return order
+
+
+@order_router.post('/')
+async def create_order(order_data: OrderSchema, session: AsyncSession = Depends(get_session)):
+    order = {}
+    return order

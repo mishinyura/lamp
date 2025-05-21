@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.orders import order_router
 from app.api.products import product_router
+from app.core.config import settings
+from app.core.db import create_tables
 
 ROUTES = {
     '/orders': order_router,
@@ -19,6 +21,9 @@ def set_routes(app: FastAPI):
 def get_app():
     """Создает приложение и возвращает уже настроенный экземпляр"""
     app = FastAPI(title='Lamp')
+    set_routes(app)
+    app.mount(settings.app.app_mount, app)
+
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["http://127.0.0.1:5500", "http://localhost:8000"],
@@ -26,5 +31,9 @@ def get_app():
         allow_methods=["*"],  # Разрешить все методы (GET, POST и т.д.)
         allow_headers=["*"],  # Разрешить все заголовки
     )
-    set_routes(app)
+
+    @app.on_event("startup")
+    async def startup_event():
+        await create_tables()
+
     return app
