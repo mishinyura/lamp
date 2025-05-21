@@ -18,6 +18,7 @@ class OrderCrud(BaseCrud, ABC):
         except SQLAlchemyError as exc:
             await session.rollback()
             raise SqlException(message=str(exc))
+
     async def read(self, order_id: int, session: AsyncSession):
         result = await session.execute(select(OrderModel).where(OrderModel.id == order_id))
         order = result.scalar_one_or_none()

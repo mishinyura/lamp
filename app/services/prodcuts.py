@@ -1,0 +1,37 @@
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.database import product_crud
+from app.schemas import ProductSchema, ProductCreateSchema
+from app.models import ProductModel
+from app.core.exceptions import SqlException, DuplicateException
+
+
+class ProductService:
+    def __init__(self):
+        self.crud = product_crud
+
+    async def get_product(self, product_id: int, session: AsyncSession) -> ProductSchema:
+        product = await self.crud.read(product_id, session)
+        return product
+
+    async def get_all_products(self, session: AsyncSession) -> list[ProductSchema]:
+        products = await self.crud.read_all(session=session)
+        return products
+
+    async def create_product(
+            self, product_data: ProductCreateSchema, session: AsyncSession
+    ):
+        product = ProductModel(
+            article=product_data.article,
+            title=product_data.title,
+            stock=product_data.stock,
+            price=product_data.price,
+            image_url=product_data.image_url
+        )
+        try:
+            await self.crud.create(product=product, session=session)
+        except SqlException as ex:
+            raise DuplicateException(message=str(ex))
+
+
+product_service = ProductService()

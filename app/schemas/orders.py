@@ -14,3 +14,9 @@ class OrderSchema(BaseModel):
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class OrderCreateSchema(BaseModel):
+    user_id: UUID
+    products: list
+    total: Decimal

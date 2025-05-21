@@ -1,31 +1,37 @@
-from fastapi import APIRouter, Depends
-from fastapi.responses import JSONResponse
-from sqlalchemy import select
+from fastapi import APIRouter, Depends, Response
 from sqlalchemy.ext.asyncio import AsyncSession
-import json
+from starlette.status import HTTP_409_CONFLICT, HTTP_201_CREATED, HTTP_404_NOT_FOUND
 
-from app.schemas.orders import OrderSchema
-from app.models.orders import OrderModel
+from app.schemas.orders import OrderSchema, OrderCreateSchema
 from app.core.db import get_session
 from app.services.orders import order_service
-
+from app.core.exceptions import DuplicateException
 
 order_router = APIRouter()
 
 
 @order_router.get('/', response_model=list[OrderSchema])
-async def order_list(session: AsyncSession = Depends(get_session)):
+async def get_order_list(session: AsyncSession = Depends(get_session)):
     orders = await order_service.get_all_orders(session=session)
+
+    if not orders:
+        return Response(status_code=HTTP_404_NOT_FOUND)
     return orders
 
 
 @order_router.get('/{order_id}')
-async def order(order_id: int, session: AsyncSession = Depends(get_session)):
+async def get_order(order_id: int, session: AsyncSession = Depends(get_session)):
     order = await order_service.get_order(order_id, session)
+
+    if not order:
+        return Response(status_code=HTTP_404_NOT_FOUND)
     return order
 
 
 @order_router.post('/')
-async def create_order(order_data: OrderSchema, session: AsyncSession = Depends(get_session)):
-    order = {}
-    return order
+async def create_order(order_data: OrderCreateSchema, session: AsyncSession = Depends(get_session)):
+    try:
+        await order_service.create_order(order_data=order_data, session=session)
+    except DuplicateException:
+        return Response(status_code=HTTP_409_CONFLICT)
+    return Response(status_code=HTTP_201_CREATED)
