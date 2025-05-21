@@ -159,7 +159,7 @@ async function editAmountCountInCart(elem) {
     let downBtn = counter.querySelector('.cards__down')
     let message = page.doc.querySelector('.notifications')
 
-    if btn.target ==
+    
 }
 
 
