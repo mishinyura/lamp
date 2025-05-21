@@ -236,6 +236,7 @@ CART PAGE
     padding: 20px 15px;
 }
 .order__title{
+    margin-bottom: 40px;
     font-family: "Montserrat";
     font-size: 20px;
     font-weight: 400;
@@ -267,6 +268,7 @@ CART PAGE
     font-style: normal;
 }
 .product__count{
+    flex-shrink: 0;
     font-family: "Montserrat";
     font-size: 16px;
     font-weight: 400;
@@ -287,6 +289,7 @@ CART PAGE
     border-left: 1px solid #fff;
 }
 .product__price{
+    flex-shrink: 0;
     font-family: "Montserrat";
     font-size: 16px;
     font-weight: 400;
@@ -468,6 +471,55 @@ FOOTER
 }
 
 
+@media screen and (max-width: 768px) {
+    .menu__link{
+        font-size: 16px;
+    }
+    .header__logo{
+        font-size: 16px;
+    }
+    .header__login{
+        font-size: 16px;
+    }
+
+    .order__content{
+        flex-direction: column;
+        align-items: end;
+    }
+    .order__list{
+        align-self: stretch;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    .product__name{
+        font-size: 12px;
+    }
+    .product__count{
+        font-size: 12px;
+    }
+    .product__down{
+        margin-right: 2px;
+    }
+    .product__amount{
+        width: 20px;
+        margin-right: 2px;
+    }
+    .product__price{
+        font-size: 12px;
+    }
+    .product__del svg{
+        width: 25px;
+        height: 25px;
+    }
+    .order__total{
+        font-size: 16px;
+    }
+    .order__btn{
+        font-size: 14px;
+    }
+}
+
+
 @media screen and (max-width: 562px) {
     .header__logo{
         order: 1;
@@ -504,6 +556,16 @@ FOOTER
     }
     .cards{
         grid-template-columns: repeat(1, 1fr);
+    }
+
+    .order__content{
+        display: block;
+    }
+    .product__name{
+        width: 100%;
+    }
+    .product{
+        flex-wrap: wrap;
     }
     .footerbar__sections{
         display: grid;

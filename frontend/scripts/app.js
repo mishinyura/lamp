@@ -129,13 +129,7 @@ const adminInit = () => {
 }
 
 
-startData = {
-    'cart': cartInit,
-    'admin': adminInit,
-    'index': indexInit
-}
 
-// startData[pageName]()
 
 
 class Page{
@@ -223,6 +217,14 @@ async function main() {
     for (let btn of page.doc.querySelectorAll('.cards__add')) {
         btn.addEventListener('click', editAmountPositionInCard)
     }
+
+    startData = {
+        'cart': cartInit,
+        'admin': adminInit,
+        'index': indexInit
+    }
+
+    startData[pageName]()
 }
 
 main()
