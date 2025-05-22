@@ -1,4 +1,4 @@
-const pageName = document.querySelector('meta[name="pagename"]').content;
+
 
 let burgerBtn, //Кнопка закрепить меню
 header, //Основной header
@@ -142,7 +142,7 @@ class Page{
         // for (let elem in elements) {
         //     console.log(elements[elem])
         // }
-        
+        this.pageName = document.querySelector('meta[name="pagename"]').content;
         this.doc = document.querySelector('.body')
     }
 
@@ -163,7 +163,26 @@ async function editAmountCountInCart(elem) {
     let message = page.doc.querySelector('.notifications')
 
     
-}
+};
+
+function changingViewBuyBtn(btn, counter){
+    let upBtn = counter.querySelector('.cards__up');
+    let downBtn = counter.querySelector('.cards__down');
+    btn.classList.toggle('show');
+    counter.classList.toggle('show');
+
+    if (btn.classList.contains('show')) {
+        btn.addEventListener('click', editAmountPositionInCard)
+        upBtn.removeEventListener('click', editAmountPositionInCard)
+        downBtn.removeEventListener('click', editAmountPositionInCard)
+    } else{
+        btn.removeEventListener('click', editAmountPositionInCard)
+        upBtn.addEventListener('click', editAmountPositionInCard)
+        downBtn.addEventListener('click', editAmountPositionInCard)
+    };
+    
+};
+    
 
 
 async function editAmountPositionInCard(elem) {
@@ -171,34 +190,20 @@ async function editAmountPositionInCard(elem) {
     let counter = parent.querySelector('.cards__count')
     let amount = counter.querySelector('.cards__amount')
     let buyBtn = parent.querySelector('.cards__add')
-    let upBtn = counter.querySelector('.cards__up')
-    let downBtn = counter.querySelector('.cards__down')
-    let message = page.doc.querySelector('.notifications')
 
     if (amount.value == 0) {
         amount.value = Number(amount.value) + 1
         amount.setAttribute('value', amount.value)
-        console.log(amount.value)
-
-        buyBtn.classList.remove('show')
-        counter.classList.add('show')
-        upBtn.addEventListener('click', editAmountPositionInCard)
-        downBtn.addEventListener('click', editAmountPositionInCard)
-
+        changingViewBuyBtn(buyBtn, counter)
     } else {
         if (elem.target.classList.contains('cards__down')) {
             if (amount.value > 1) {
                 amount.value = Number(amount.value) - 1
                 amount.setAttribute('value', amount.value)
             } else {
-                buyBtn.classList.add('show')
-                counter.classList.remove('show')
-
                 amount.value = 0
                 amount.setAttribute('value', amount.value)
-
-                upBtn.removeEventListener('click', editAmountPositionInCard)
-                downBtn.removeEventListener('click', editAmountPositionInCard)
+                changingViewBuyBtn(buyBtn, counter)
             }
         } else if(elem.target.classList.contains('cards__up')) {
             let permission = await request(
@@ -238,7 +243,7 @@ async function main() {
         'index': indexInit
     }
 
-    startData[pageName]()
+    // startData[pageName]()
 }
 
 main()

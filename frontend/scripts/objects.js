@@ -14,10 +14,10 @@ class Notification{
         this.notificationDescr.innerHTML = message
     }
 
-    showMessage(){
+    showMessage(timer=5){
         this.notificationContainer.classList.add('show')
         setTimeout(() => {
             this.notificationContainer.classList.remove('show')
-        }, 5000);
+        }, timer * 1000);
     }
 }
