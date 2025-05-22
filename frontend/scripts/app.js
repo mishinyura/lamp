@@ -132,6 +132,9 @@ const adminInit = () => {
 
 
 
+
+
+
 class Page{
     constructor(elements) {
         this.objects = elements
@@ -211,11 +214,10 @@ async function editAmountPositionInCard(elem) {
                 amount.value = Number(amount.value) + 1
                 amount.setAttribute('value', amount.value)
             } else {
-                message.classList.add('show')
-                setTimeout(() => {
-                    message.classList.remove('show')
-                }, 5000);
-                
+                let notification = new Notification('notifications')
+                message = notification.messages.NOT_ENOUGH_PRODUCT
+                notification.setMessage(message)
+                notification.showMessage()
             }
         }
         
