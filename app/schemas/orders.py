@@ -1,10 +1,10 @@
 from pydantic import BaseModel, ConfigDict
-from uuid import UUID
 from decimal import Decimal
 from datetime import datetime
 
 from app.core.enums import OrderStatus
-from app.schemas import ProductAddCartSchema, UserCreateSchema
+from app.schemas.products import ProductAddCartSchema
+from app.schemas.users import UserCreateSchema
 
 
 class OrderSchema(BaseModel):
