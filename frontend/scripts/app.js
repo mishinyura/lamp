@@ -1,5 +1,3 @@
-
-
 let burgerBtn, //Кнопка закрепить меню
 header, //Основной header
 addBtnCartPosition, //Кнопка увеличения объма товара в корзине
@@ -104,22 +102,22 @@ const indexInit = () => {
 }
 
 
-const cartInit = () => {
-    addBtnCartPosition = document.querySelector('.product__up');
-    amountCartPosition = document.querySelector('.product__amount');
-    delBtnCartPosition = document.querySelector('.product__down');
-    productsInOrder = document.querySelectorAll('.product');
-    orderBtn = document.querySelector('.order__btn');
+// const cartInit = () => {
+//     addBtnCartPosition = document.querySelector('.product__up');
+//     amountCartPosition = document.querySelector('.product__amount');
+//     delBtnCartPosition = document.querySelector('.product__down');
+//     productsInOrder = document.querySelectorAll('.product');
+//     orderBtn = document.querySelector('.order__btn');
 
-    addBtnCartPosition.addEventListener('click', upProduct)
-    delBtnCartPosition.addEventListener('click', downProduct)
+//     addBtnCartPosition.addEventListener('click', upProduct)
+//     delBtnCartPosition.addEventListener('click', downProduct)
 
-    orderBtn.addEventListener('click', openModal)
+//     orderBtn.addEventListener('click', openModal)
 
-    for (let prod of productsInOrder) {
-        prod.addEventListener('click', delProduct)
-    }
-}
+//     for (let prod of productsInOrder) {
+//         prod.addEventListener('click', delProduct)
+//     }
+// }
 
 const adminInit = () => {
     burgerBtn = document.querySelector('.header__burger');
@@ -135,23 +133,8 @@ const adminInit = () => {
 
 
 
-class Page{
-    constructor(elements) {
-        this.objects = elements
-        // console.log(elements)
-        // for (let elem in elements) {
-        //     console.log(elements[elem])
-        // }
-        this.pageName = document.querySelector('meta[name="pagename"]').content;
-        this.doc = document.querySelector('.body')
-    }
 
-    
-}
 
-const page = new Page({
-    data: 'ok'
-});
 
 async function editAmountCountInCart(elem) {
     let parent = elem.target.closest('li')
@@ -165,9 +148,13 @@ async function editAmountCountInCart(elem) {
     
 };
 
+
+
+
 function changingViewBuyBtn(btn, counter){
-    let upBtn = counter.querySelector('.cards__up');
-    let downBtn = counter.querySelector('.cards__down');
+    let classBlock = counter.className.match(/.([a-zA-Z0-9]+)(?=__)/)[0]
+    let upBtn = counter.querySelector(`.${classBlock}__up`);
+    let downBtn = counter.querySelector(`.${classBlock}__down`);
     btn.classList.toggle('show');
     counter.classList.toggle('show');
 
@@ -190,11 +177,16 @@ async function editAmountPositionInCard(elem) {
     let counter = parent.querySelector('.cards__count')
     let amount = counter.querySelector('.cards__amount')
     let buyBtn = parent.querySelector('.cards__add')
+    let data = {
+        article: String(parent.dataset.article),
+        amount: Number(amount.value)
+    };
 
     if (amount.value == 0) {
         amount.value = Number(amount.value) + 1
         amount.setAttribute('value', amount.value)
         changingViewBuyBtn(buyBtn, counter)
+        page.objects.cart.addProduct(data.article, data.amount)
     } else {
         if (elem.target.classList.contains('cards__down')) {
             if (amount.value > 1) {
@@ -204,20 +196,20 @@ async function editAmountPositionInCard(elem) {
                 amount.value = 0
                 amount.setAttribute('value', amount.value)
                 changingViewBuyBtn(buyBtn, counter)
+                page.objects.cart.delProduct(data.article)
             }
         } else if(elem.target.classList.contains('cards__up')) {
+            
             let permission = await request(
                 `http://localhost:8000/products/check`,
                 'POST',
-                {
-                    article: String(parent.dataset.article),
-                    amount: Number(amount.value)
-                }
-            )
+                data
+            );
 
             if (permission) {
                 amount.value = Number(amount.value) + 1
                 amount.setAttribute('value', amount.value)
+                page.objects.cart.addProduct(data.article, data.amount)
             } else {
                 let notification = new Notification('notifications')
                 message = notification.messages.NOT_ENOUGH_PRODUCT
@@ -230,20 +222,41 @@ async function editAmountPositionInCard(elem) {
 }
 
 
-async function main() {
-    // console.log(page.doc.querySelectorAll('.cards__add'))
+async function editAmountPositionInCart(elem) {
+    let parent = elem.target.closest('li')
+    let amount = parent.querySelector('.product__amount')
+    let data = {
+        article: String(parent.dataset.article),
+        amount: Number(amount.value)
+    };
 
-    for (let btn of page.doc.querySelectorAll('.cards__add')) {
-        btn.addEventListener('click', editAmountPositionInCard)
+    if (elem.target.classList.contains('product__down')) {
+        page.objects.cart.delProduct(data.article)
+    } else {
+        let permission = await request(
+            `http://localhost:8000/products/check`,
+            'POST',
+            data
+        );
+
+        if (permission) {
+            page.objects.cart.addProduct(data.article, data.amount)
+        }
     }
+}
 
+
+function main() {
     startData = {
         'cart': cartInit,
         'admin': adminInit,
-        'index': indexInit
+        'products': productsInit
     }
 
-    // startData[pageName]()
+    startData[page.pageName]()
 }
+
+
+
 
 main()

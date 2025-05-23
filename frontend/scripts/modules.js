@@ -18,9 +18,3 @@ async function request(path='/', method='GET', body={}) {
     console.error('Ошибка:', error);
   }
 }
-
-// Вызов функции
-async function main() {
-}
-
-main()

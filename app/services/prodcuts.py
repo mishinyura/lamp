@@ -49,7 +49,8 @@ class ProductService:
             self, product_data: ProductAddCartSchema, session: AsyncSession
     ) -> bool:
         product = await self.crud.get_by_article(product_article=product_data.article, session=session)
-        if product.stock >= product_data.amount:
+
+        if product and (product.stock >= product_data.amount):
             return True
         else:
             return False

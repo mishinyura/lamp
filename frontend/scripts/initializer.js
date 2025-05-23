@@ -1,12 +1,22 @@
+const page = new Page
+
+const productsInit = () => {
+    page.addElement(new Cart, "cart")
+
+    for (let btn of page.doc.querySelectorAll('.cards__add')) {
+        btn.addEventListener('click', editAmountPositionInCard)
+    }
+}
+
+
 const cartInit = () => {
-    let dom = {
-        parent: document.querySelectorAll('.product'),
-        counter: parent.querySelectorAll('.product__count'),
-        amount: counter.querySelectorAll('.product__amount'),
-        upBtn: counter.querySelectorAll('.product__up'),
-        downBtn: counter.querySelectorAll('.product__down'),
-        message: page.doc.querySelector('.notifications')
+    page.addElement(new Cart, "cart")
+
+    for (let btn of page.doc.querySelectorAll('.product__down')) {
+        btn.addEventListener('click', editAmountPositionInCart)
     }
 
-    return dom
+    for (let btn of page.doc.querySelectorAll('.product__up')) {
+        btn.addEventListener('click', editAmountPositionInCart)
+    } 
 }
