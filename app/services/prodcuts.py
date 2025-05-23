@@ -4,7 +4,7 @@ from typing import List
 from app.database import product_crud
 from app.schemas import ProductSchema, ProductCreateSchema, ProductAddCartSchema
 from app.models import ProductModel
-from app.core.exceptions import SqlException, DuplicateException
+from app.core.exceptions import SqlException, DuplicateException, NotFoundException
 
 
 class ProductService:
@@ -54,6 +54,15 @@ class ProductService:
             return True
         else:
             return False
+
+    async def update_product_data(
+            self, product_id: int, product_data: ProductCreateSchema, session: AsyncSession
+    ) -> None:
+        product = await self.crud.read(product_id=product_id, session=session)
+        if product:
+            await self.crud.update(product_id=product_id, new_data=product_data, session=session)
+        else:
+            raise NotFoundException(message='Product not found')
 
 
 product_service = ProductService()

@@ -26,12 +26,12 @@ class ProductCRUD(BaseCrud, ABC):
             return None
         return ProductSchema.model_validate(product)
 
-    async def update(self, product_id: int, data: dict, session: AsyncSession) -> bool:
+    async def update(self, product_id: int, new_data: dict, session: AsyncSession) -> bool:
         try:
             result = await session.execute(
                 update(ProductModel)
                 .where(ProductModel.id == product_id)
-                .values(**data)
+                .values(**new_data.dict(exclude_unset=True))
                 .execution_options(synchronize_session="fetch")
             )
             await session.commit()
