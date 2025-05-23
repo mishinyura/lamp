@@ -4,8 +4,7 @@ from decimal import Decimal
 from datetime import datetime
 
 from app.core.enums import OrderStatus
-from app.schemas.products import ProductAddCartSchema
-from app.schemas.users import UserCreateSchema
+from app.schemas import ProductAddCartSchema, UserCreateSchema
 
 
 class OrderSchema(BaseModel):

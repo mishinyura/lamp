@@ -1,4 +1,5 @@
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import String
+from sqlalchemy.orm import Mapped, mapped_column
 
 from app.models.base import BaseModel, Base
 
@@ -6,5 +7,5 @@ from app.models.base import BaseModel, Base
 class UserModel(BaseModel, Base):
     __tablename__ = 'users'
 
-    name = Column(String, nullable=False)
-    phone = Column(String(12), nullable=False)
+    name: Mapped[str] = mapped_column(String, nullable=False)
+    phone: Mapped[str] = mapped_column(String(12), nullable=False)

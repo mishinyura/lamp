@@ -19,11 +19,11 @@ class ProductCRUD(BaseCrud, ABC):
             await session.rollback()
             raise SqlException(message=str(exc))
 
-    async def read(self, product_id: int, session: AsyncSession) -> ProductSchema | None:
+    async def read(self, product_id: int, session: AsyncSession) -> ProductSchema:
         result = await session.execute(select(ProductModel).where(ProductModel.id == product_id))
         product = result.scalar_one_or_none()
         if not product:
-            return None
+            raise SqlException('Not found')
         return ProductSchema.model_validate(product)
 
     async def update(self, product_id: int, new_data: dict, session: AsyncSession) -> bool:
@@ -40,8 +40,17 @@ class ProductCRUD(BaseCrud, ABC):
             await session.rollback()
             raise
 
-    async def delete(self, obj_id: int, session: AsyncSession) -> None:
-        pass
+    async def delete(self, product_id: int, session: AsyncSession):
+        result = await session.execute(
+            select(ProductModel).where(ProductModel.id == product_id)
+        )
+        product = result.scalar_one_or_none()
+
+        if product:
+            await session.delete(product)
+            await session.commit()
+        else:
+            raise SqlException('Element not found')
 
     @classmethod
     async def get_by_article(cls, product_article: str, session: AsyncSession) -> ProductSchema | None:
@@ -53,9 +62,11 @@ class ProductCRUD(BaseCrud, ABC):
         return ProductSchema.model_validate(product)
 
     @classmethod
-    async def read_all(cls, session: AsyncSession) -> list[ProductSchema]:
+    async def read_all(cls, session: AsyncSession) -> list[ProductSchema] | list:
         result = await session.execute(select(ProductModel))
         products = result.scalars().all()
+        if not products:
+            return []
         return [ProductSchema.model_validate(product) for product in products]
 
     @classmethod

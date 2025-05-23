@@ -1,5 +1,5 @@
-from sqlalchemy import Integer, Column
-from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy import Integer
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class Base(DeclarativeBase):
@@ -7,4 +7,4 @@ class Base(DeclarativeBase):
 
 
 class BaseModel:
-    id = Column(Integer, primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)

@@ -12,7 +12,10 @@ class ProductService:
         self.crud = product_crud
 
     async def get_product(self, product_id: int, session: AsyncSession) -> ProductSchema:
-        product = await self.crud.read(product_id, session)
+        try:
+            product = await self.crud.read(product_id, session)
+        except SqlException:
+            raise NotFoundException(message='Product not found')
         return product
 
     async def get_all_products(self, session: AsyncSession) -> List[ProductSchema]:
@@ -31,8 +34,8 @@ class ProductService:
         )
         try:
             await self.crud.create(product=product, session=session)
-        except SqlException as ex:
-            raise DuplicateException(message=str(ex))
+        except SqlException:
+            raise DuplicateException(message='Product already exist')
 
     async def get_sum_products(self, products: List[dict]) -> float:
         articles = {product['article']: product['amount'] for product in products}
@@ -62,6 +65,12 @@ class ProductService:
         if product:
             await self.crud.update(product_id=product_id, new_data=product_data, session=session)
         else:
+            raise NotFoundException(message='Product not found')
+
+    async def remove_product_from_store(self, product_id: int, session: AsyncSession) -> None:
+        try:
+            await self.crud.delete(product_id=product_id, session=session)
+        except SqlException:
             raise NotFoundException(message='Product not found')
 
 
