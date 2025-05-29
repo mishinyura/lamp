@@ -6,7 +6,7 @@ app_port=8000
 app_mount='/api/v1'
 
 [db_settings]
-db_name='db_lamp'
+db_name='lamp_db'
 db_user='postgres'
 db_password='boss'
 db_host='localhost'
