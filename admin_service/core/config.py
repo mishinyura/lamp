@@ -39,6 +39,6 @@ dyna_settings = Dynaconf(
 )
 
 settings = Settings(
-    admin_app=dyna_settings['admin_app'],
+    admin_app=dyna_settings['admin_service'],
     db=dyna_settings['db_settings']
 )

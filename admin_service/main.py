@@ -1,7 +1,7 @@
 import uvicorn
 
-from admin_app.core.config import settings
-from admin_app.core.app import get_app
+from admin_service.core.config import settings
+from admin_service.core.app import get_app
 
 
 if __name__ == '__main__':

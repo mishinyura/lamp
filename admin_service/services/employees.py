@@ -1,8 +1,8 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from admin_app.database import employee_crud
-from admin_app.schemas import EmployeeSchema, EmployeeLoginSchema
-from admin_app.models import EmployeeModel
+from admin_service.database import employee_crud
+from admin_service.schemas import EmployeeSchema, EmployeeLoginSchema
+from admin_service.models import EmployeeModel
 from app.core.exceptions import SqlException, DuplicateException
 
 

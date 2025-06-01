@@ -1,8 +1,8 @@
 from sqlalchemy import String, Integer, Enum as AlchemyEnum
 from sqlalchemy.orm import Mapped, mapped_column
 
-from admin_app.models.base import BaseModel, Base
-from admin_app.core.enums import EmployeeRole, EmployeeStatus
+from admin_service.models.base import BaseModel, Base
+from admin_service.core.enums import EmployeeRole, EmployeeStatus
 
 
 class EmployeeModel(BaseModel, Base):
