@@ -4,7 +4,6 @@ class Page{
     constructor() {
         this.objects = {}
         this.pageName = document.querySelector('meta[name="pagename"]').content;
-        this.updateDoc()
     }
 
 
@@ -13,12 +12,6 @@ class Page{
         console.dir(this.objects)
 
     }
-
-    updateDoc() {
-        this.doc = document.querySelector('.body')
-    }
-
-    
 }
 
 class Notification{
@@ -106,64 +99,65 @@ class Card{
         this.baseClass = containerClassName
         this.container = document.querySelector(`.${this.baseClass}`)
         this.data = productData
+        console.log(this.data)
         this.create()
     }
 
     create(){
-        let card = document.createElement('li')
-        let imageContainer = document.createElement('div')
-        let image = document.createElement('img')
-        let title = document.createElement('h3')
-        let price = document.createElement('span')
-        let counter = document.createElement('div')
-        let buyBtn = document.createElement('button')
-        let upBtn = document.createElement('button')
-        let downBtn = document.createElement('button')
-        let amount = document.createElement('input')
+        this.card = document.createElement('li')
+        this.imageContainer = document.createElement('div')
+        this.image = document.createElement('img')
+        this.title = document.createElement('h3')
+        this.price = document.createElement('span')
+        this.counter = document.createElement('div')
+        this.buyBtn = document.createElement('button')
+        this.upBtn = document.createElement('button')
+        this.downBtn = document.createElement('button')
+        this.amount = document.createElement('input')
 
-        card.classList.add(`${this.baseClass}__item`)
-        imageContainer.classList.add(`${this.baseClass}__image`)
-        title.classList.add(`${this.baseClass}__title`)
-        price.classList.add(`${this.baseClass}__price`)
-        counter.classList.add(`${this.baseClass}__count`)
-        buyBtn.classList.add(`${this.baseClass}__add`)
-        upBtn.classList.add(`${this.baseClass}__up`)
-        downBtn.classList.add(`${this.baseClass}__down`)
-        amount.classList.add(`${this.baseClass}__amount`)
+        this.card.classList.add(`${this.baseClass}__item`)
+        this.imageContainer.classList.add(`${this.baseClass}__image`)
+        this.title.classList.add(`${this.baseClass}__title`)
+        this.price.classList.add(`${this.baseClass}__price`)
+        this.counter.classList.add(`${this.baseClass}__count`)
+        this.buyBtn.classList.add(`${this.baseClass}__add`)
+        this.upBtn.classList.add(`${this.baseClass}__up`)
+        this.downBtn.classList.add(`${this.baseClass}__down`)
+        this.amount.classList.add(`${this.baseClass}__amount`)
 
-        card.dataset.article = this.data.article
-        // image.setAttribute('src', `${SERVER}static/${data.image}`)
-        image.setAttribute('alt', this.data.title)
-        title.innerHTML = this.data.title
-        price.innerHTML = this.data.price
-        buyBtn.classList.add(`${this.baseClass}__add`)
-        buyBtn.classList.add('show')
-        buyBtn.innerHTML = 'Купить'
-        // buyBtn.setAttribute('type', 'button')
-        upBtn.setAttribute('type', 'button')
-        downBtn.setAttribute('type', 'button')
-        upBtn.innerHTML = '+'
-        downBtn.innerHTML = '-'
-        amount.setAttribute('value', '0')
-        amount.setAttribute('name', 'product_amount')
+        this.card.dataset.article = this.data.article
+        this.image.setAttribute('src', `${SERVER}static/${this.data.image_url}`)
+        this.image.setAttribute('alt', this.data.title)
+        this.title.innerHTML = this.data.title
+        this.price.innerHTML = this.data.price
+        this.buyBtn.classList.add(`${this.baseClass}__add`)
+        this.buyBtn.classList.add('show')
+        this.buyBtn.innerHTML = 'Купить'
+        // this.buyBtn.setAttribute('type', 'button')
+        this.upBtn.setAttribute('type', 'button')
+        this.downBtn.setAttribute('type', 'button')
+        this.upBtn.innerHTML = '+'
+        this.downBtn.innerHTML = '-'
+        this.amount.setAttribute('value', '0')
+        this.amount.setAttribute('name', 'product_amount')
 
-        imageContainer.appendChild(image)
+        this.imageContainer.appendChild(this.image)
 
-        counter.appendChild(downBtn)
-        counter.appendChild(amount)
-        counter.appendChild(upBtn)
+        this.counter.appendChild(this.downBtn)
+        this.counter.appendChild(this.amount)
+        this.counter.appendChild(this.upBtn)
         
 
-        card.appendChild(imageContainer)
-        card.appendChild(title)
-        card.appendChild(price)
-        card.appendChild(buyBtn)
-        card.appendChild(counter)
+        this.card.appendChild(this.imageContainer)
+        this.card.appendChild(this.title)
+        this.card.appendChild(this.price)
+        this.card.appendChild(this.buyBtn)
+        this.card.appendChild(this.counter)
 
 
-        this.container.appendChild(card)
+        this.container.appendChild(this.card)
 
-        return card
+        return this.card
     }
 
     editAmountInIcon(value) {

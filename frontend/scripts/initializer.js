@@ -3,11 +3,8 @@ const page = new Page()
 async function productsInit() {
     page.addElement(new Cart, "cart")
     let menu = new TopMenu('menu')
-    // let cards = new Card('cards')
     page.addElement(menu, "topmenu")
     page.addElement([], "cards")
-    // page.updateDoc()
-    // page.objects.card.addCardsInDom()
 
     let products = await request(
         `${SERVER}products`
@@ -18,8 +15,8 @@ async function productsInit() {
         page.objects.cards.push(card)
     }
 
-    for (let btn of page.doc.querySelectorAll('.cards__add')) {
-        btn.addEventListener('click', editAmountPositionInCard)
+    for (let btn of page.objects.cards) {
+        btn.buyBtn.addEventListener('click', editAmountPositionInCard)
     }
 
     menu.burger.addEventListener('click', () => menu.editState())

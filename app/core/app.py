@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api import order_router, product_router
@@ -22,6 +23,7 @@ def get_app():
     app = FastAPI(title='Lamp')
     set_routes(app)
     app.mount(settings.app.app_mount, app)
+    app.mount("/static", StaticFiles(directory="static"), name="static")
 
     app.add_middleware(
         CORSMiddleware,

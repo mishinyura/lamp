@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Request, Body, Depends, HTTPException
-from fastapi.responses import JSONResponse, Response
+from fastapi.responses import JSONResponse, Response, FileResponse
 from starlette.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_404_NOT_FOUND, HTTP_409_CONFLICT
 from sqlalchemy.ext.asyncio import AsyncSession
-import json
+import os
 
 from app.schemas import ProductSchema, ProductCreateSchema, ProductAddCartSchema
 from app.core.exceptions import DuplicateException, NotFoundException
@@ -52,6 +52,13 @@ async def product_availability(
         return True
     else:
         return False
+
+
+@product_router.post('/static/{image_path}', response_model=bool)
+async def product_availability(image_path: str):
+    """Возврат фотографии"""
+    path = os.path.join('app', 'static', image_path)
+    return FileResponse(path)
 
 
 @product_router.put('/{product_id}', response_model=None)
