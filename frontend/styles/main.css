@@ -158,21 +158,16 @@ Main section
 }
 .cards{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     justify-content: center;
     gap: 24px;
-    padding: 24px 0;
     list-style: none;
-    margin: 0 auto;
-    max-width: 1200px;  /* ограничение ширины контейнера по центру */
 }
 .cards__item{
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 5px;
-    /* max-height: 500px; */
-    max-width: 300px;
+    row-gap: 8px;
     min-width: 0;
     padding: 5px;
     aspect-ratio: 3/4;
@@ -184,7 +179,7 @@ Main section
 }
 .cards__image{
     width: 100%;
-    aspect-ratio: 1/1;           /* квадратная картинка */
+    aspect-ratio: 1/1;
     overflow: hidden;
     background: #f7f7f7;
     display: flex;
@@ -230,7 +225,9 @@ Main section
 }
 .cards__add{
     display: none;
+    height: 40px;
     padding: 6px 13px;
+    margin-bottom: 1vw;
     border: none;
     border-radius: 20px;
     font-family: "Montserrat";
@@ -245,27 +242,39 @@ Main section
 }
 .cards__count{
     display: none;
+    height: 40px;
+    margin-bottom: 1vw;
     font-family: "Montserrat";
     font-size: 16px;
     font-weight: 400;
     font-style: normal;
 }
 .cards__count.show{
-    display: block;
+    display: flex;
+    align-items: center;
 }
 .cards__down{
     margin-right: 5px;
     border-right: 1px solid #fff;
+    font-family: "Montserrat";
+    font-size: 1.1rem;
+    font-weight: 400;
 }
 .cards__amount{
     width: 25px;
     margin-right: 5px;
+    font-family: "Montserrat";
+    font-size: 1rem;
+    font-weight: 400;
     text-align: center;
     background: none;
     border: none;
 }
 .cards__up{
     position: relative;
+    font-family: "Montserrat";
+    font-size: 1.1rem;
+    font-weight: 400;
     z-index: 1000;
 }
 
@@ -527,11 +536,16 @@ FOOTER
 }
 
 
-
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
     .cards{
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
+}
+
+@media screen and (max-width: 900px) {
+    /* .cards{
+        grid-template-columns: repeat(3, 1fr);
+    } */
 }
 
 
@@ -588,9 +602,6 @@ FOOTER
     .cards__item{
         padding: 10px;
     }
-    .cards__title{
-        font-size: 3vw;
-    }
 }
 
 
@@ -612,7 +623,7 @@ FOOTER
         padding: 120px 20px;
         background-color: var(--bg_color_black);
         z-index: 10;
-        transition: left .3s cubic-bezier(0.87, 0, 0.13, 1);;
+        transition: left .3s cubic-bezier(0.87, 0, 0.13, 1);
     }
     .menu__list.show{
         left: -15px;
