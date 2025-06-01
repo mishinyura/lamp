@@ -2,8 +2,8 @@ version: "3.9"
 services:
   app:
     build:
-      context: ./app
-    container_name: app
+      context: ./order_service
+    container_name: order_service
     ports:
       - "8000:8000"
     restart: always
