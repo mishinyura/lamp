@@ -123,99 +123,99 @@ let modals = document.querySelectorAll('.modals__modal');
 
 
 
-function changingViewBuyBtn(btn, counter){
-    let classBlock = counter.className.match(/.([a-zA-Z0-9]+)(?=__)/)[0]
-    let upBtn = counter.querySelector(`.${classBlock}__up`);
-    let downBtn = counter.querySelector(`.${classBlock}__down`);
-    btn.classList.toggle('show');
-    counter.classList.toggle('show');
+// function changingViewBuyBtn(btn, counter){
+//     let classBlock = counter.className.match(/.([a-zA-Z0-9]+)(?=__)/)[0]
+//     let upBtn = counter.querySelector(`.${classBlock}__up`);
+//     let downBtn = counter.querySelector(`.${classBlock}__down`);
+//     btn.classList.toggle('show');
+//     counter.classList.toggle('show');
 
-    if (btn.classList.contains('show')) {
-        btn.addEventListener('click', editAmountPositionInCard)
-        upBtn.removeEventListener('click', editAmountPositionInCard)
-        downBtn.removeEventListener('click', editAmountPositionInCard)
-    } else{
-        btn.removeEventListener('click', editAmountPositionInCard)
-        upBtn.addEventListener('click', editAmountPositionInCard)
-        downBtn.addEventListener('click', editAmountPositionInCard)
-    };
+//     if (btn.classList.contains('show')) {
+//         btn.addEventListener('click', editAmountPositionInCard)
+//         upBtn.removeEventListener('click', editAmountPositionInCard)
+//         downBtn.removeEventListener('click', editAmountPositionInCard)
+//     } else{
+//         btn.removeEventListener('click', editAmountPositionInCard)
+//         upBtn.addEventListener('click', editAmountPositionInCard)
+//         downBtn.addEventListener('click', editAmountPositionInCard)
+//     };
     
-};
+// };
     
 
 
-async function editAmountPositionInCard(elem) {
-    let parent = elem.target.closest('li')
-    let counter = parent.querySelector('.cards__count')
-    let amount = counter.querySelector('.cards__amount')
-    let buyBtn = parent.querySelector('.cards__add')
-    let data = {
-        article: String(parent.dataset.article),
-        amount: Number(amount.value)
-    };
+// async function editAmountPositionInCard(elem) {
+//     let parent = elem.target.closest('li')
+//     let counter = parent.querySelector('.cards__count')
+//     let amount = counter.querySelector('.cards__amount')
+//     let buyBtn = parent.querySelector('.cards__add')
+//     let data = {
+//         article: String(parent.dataset.article),
+//         amount: Number(amount.value)
+//     };
 
-    if (amount.value == 0) {
-        amount.value = Number(amount.value) + 1
-        amount.setAttribute('value', amount.value)
-        changingViewBuyBtn(buyBtn, counter)
-        page.objects.cart.addProduct(data.article, data.amount)
-    } else {
-        if (elem.target.classList.contains('cards__down')) {
-            if (amount.value > 1) {
-                amount.value = Number(amount.value) - 1
-                amount.setAttribute('value', amount.value)
-            } else {
-                amount.value = 0
-                amount.setAttribute('value', amount.value)
-                changingViewBuyBtn(buyBtn, counter)
-                page.objects.cart.delProduct(data.article)
-            }
-        } else if(elem.target.classList.contains('cards__up')) {
+//     if (amount.value == 0) {
+//         amount.value = Number(amount.value) + 1
+//         amount.setAttribute('value', amount.value)
+//         changingViewBuyBtn(buyBtn, counter)
+//         page.objects.cart.addProduct(data.article, data.amount)
+//     } else {
+//         if (elem.target.classList.contains('cards__down')) {
+//             if (amount.value > 1) {
+//                 amount.value = Number(amount.value) - 1
+//                 amount.setAttribute('value', amount.value)
+//             } else {
+//                 amount.value = 0
+//                 amount.setAttribute('value', amount.value)
+//                 changingViewBuyBtn(buyBtn, counter)
+//                 page.objects.cart.delProduct(data.article)
+//             }
+//         } else if(elem.target.classList.contains('cards__up')) {
             
-            let permission = await request(
-                `http://localhost:8000/products/check`,
-                'POST',
-                data
-            );
+//             let permission = await request(
+//                 `http://localhost:8000/products/check`,
+//                 'POST',
+//                 data
+//             );
 
-            if (permission) {
-                amount.value = Number(amount.value) + 1
-                amount.setAttribute('value', amount.value)
-                page.objects.cart.addProduct(data.article, data.amount)
-            } else {
-                let notification = new Notification('notifications')
-                message = notification.messages.NOT_ENOUGH_PRODUCT
-                notification.setMessage(message)
-                notification.showMessage()
-            }
-        }
+//             if (permission) {
+//                 amount.value = Number(amount.value) + 1
+//                 amount.setAttribute('value', amount.value)
+//                 page.objects.cart.addProduct(data.article, data.amount)
+//             } else {
+//                 let notification = new Notification('notifications')
+//                 message = notification.messages.NOT_ENOUGH_PRODUCT
+//                 notification.setMessage(message)
+//                 notification.showMessage()
+//             }
+//         }
         
-    }
-}
+//     }
+// }
 
 
-async function editAmountPositionInCart(elem) {
-    let parent = elem.target.closest('li')
-    let amount = parent.querySelector('.product__amount')
-    let data = {
-        article: String(parent.dataset.article),
-        amount: Number(amount.value)
-    };
+// async function editAmountPositionInCart(elem) {
+//     let parent = elem.target.closest('li')
+//     let amount = parent.querySelector('.product__amount')
+//     let data = {
+//         article: String(parent.dataset.article),
+//         amount: Number(amount.value)
+//     };
 
-    if (elem.target.classList.contains('product__down')) {
-        page.objects.cart.delProduct(data.article)
-    } else {
-        let permission = await request(
-            `http://localhost:8000/products/check`,
-            'POST',
-            data
-        );
+//     if (elem.target.classList.contains('product__down')) {
+//         page.objects.cart.delProduct(data.article)
+//     } else {
+//         let permission = await request(
+//             `http://localhost:8000/products/check`,
+//             'POST',
+//             data
+//         );
 
-        if (permission) {
-            page.objects.cart.addProduct(data.article, data.amount)
-        }
-    }
-}
+//         if (permission) {
+//             page.objects.cart.addProduct(data.article, data.amount)
+//         }
+//     }
+// }
 
 
 function main() {

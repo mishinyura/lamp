@@ -248,10 +248,12 @@ Main section
     font-size: 16px;
     font-weight: 400;
     font-style: normal;
+    /* visibility: hidden; */
 }
 .cards__count.show{
     display: flex;
     align-items: center;
+    /* visibility: visible; */
 }
 .cards__down{
     margin-right: 5px;

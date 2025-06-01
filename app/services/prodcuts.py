@@ -53,8 +53,11 @@ class ProductService:
     ) -> bool:
         product = await self.crud.get_by_article(product_article=product_data.article, session=session)
 
-        if product and (product.stock >= product_data.amount):
-            return True
+        print(product.stock, product_data.amount)
+
+        if product:
+            if product.stock >= product_data.amount:
+                return True
         else:
             return False
 

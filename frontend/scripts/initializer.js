@@ -7,7 +7,7 @@ async function productsInit() {
     page.addElement([], "cards")
 
     let products = await request(
-        `${SERVER}products`
+        `${SERVER}/products`
     )
 
     for (let product of products) {
@@ -15,9 +15,9 @@ async function productsInit() {
         page.objects.cards.push(card)
     }
 
-    for (let btn of page.objects.cards) {
-        btn.buyBtn.addEventListener('click', editAmountPositionInCard)
-    }
+    // for (let card of page.objects.cards) {
+    //     card.buyBtn.addEventListener('click', () => card.addProduct())
+    // }
 
     menu.burger.addEventListener('click', () => menu.editState())
 }
@@ -26,11 +26,11 @@ async function productsInit() {
 const cartInit = () => {
     page.addElement(new Cart, "cart")
 
-    for (let btn of page.doc.querySelectorAll('.product__down')) {
-        btn.addEventListener('click', editAmountPositionInCart)
-    }
+    // for (let btn of page.doc.querySelectorAll('.product__down')) {
+    //     btn.addEventListener('click', editAmountPositionInCart)
+    // }
 
-    for (let btn of page.doc.querySelectorAll('.product__up')) {
-        btn.addEventListener('click', editAmountPositionInCart)
-    } 
+    // for (let btn of page.doc.querySelectorAll('.product__up')) {
+    //     btn.addEventListener('click', editAmountPositionInCart)
+    // } 
 }
