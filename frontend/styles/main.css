@@ -174,7 +174,7 @@ Main section
     border-image-slice: 1;
     background-color: #fff;
 }
-.card__image{
+.cards__image{
     width: 90%;
     height: 250px;
     background-image: url('../images/noneimg.png');

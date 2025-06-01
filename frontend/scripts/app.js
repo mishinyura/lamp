@@ -17,89 +17,61 @@ let openModalNow;
 
 let modals = document.querySelectorAll('.modals__modal');
 
-function print(data) {
-    console.log(data)
-}
 
-const upProduct = () => {
-    amountProduct = Number(amountCartPosition.value);
-    productTotal = Number()
-    permission = true //Тут будет запрос к серверу на наличие такого количества
-    if (permission && amountCartPosition.value < 99) {
-        amountCartPosition.value = amountProduct + 1
-    } else {
-        amountCartPosition.value = 99
-    }
-}
 
-const downProduct = () => {
-    amountProduct = Number(amountCartPosition.value);
-    if (amountProduct === 1) {
-        amountCartPosition.value = 1
-    } else {
-        amountCartPosition.value = amountProduct - 1
-    }
-}
+// const closeModal = () => {
+//     openModalNow.classList.remove('show')
+//     openModalNow.parentElement.classList.remove('show')
+//     openModalNow = null
+// }
 
-const delProduct = (elem) => {
-    let product = elem.target
-    product.parentNode.remove()
-    console.dir(product)
-}
+// const openModal = (btn) => {
+//     for (let modal of modals) {
+//         if (modal.getAttribute('name') === btn.target.getAttribute('name')) {
+//             modal.classList.add('show')
+//             modal.parentElement.classList.add('show')
+//             openModalNow = modal
+//             modal.querySelector('.btn-close').addEventListener('click', closeModal)
+//         }
+//     }
 
-const closeModal = () => {
-    openModalNow.classList.remove('show')
-    openModalNow.parentElement.classList.remove('show')
-    openModalNow = null
-}
+// }
 
-const openModal = (btn) => {
-    for (let modal of modals) {
-        if (modal.getAttribute('name') === btn.target.getAttribute('name')) {
-            modal.classList.add('show')
-            modal.parentElement.classList.add('show')
-            openModalNow = modal
-            modal.querySelector('.btn-close').addEventListener('click', closeModal)
-        }
-    }
-
-}
-
-const editMenu = () => {
-    menuContainer.classList.toggle('show')
-}
+// const editMenu = () => {
+//     menuContainer.classList.toggle('show')
+// }
 
 
 
 
 
-const editViewAddBtn = (btn) => {
-    btn.target.classList.toggle('show')
-    let newBtn = btn.target.nextElementSibling
-    newBtn.classList.toggle('show')    
-}
+// const editViewAddBtn = (btn) => {
+//     btn.target.classList.toggle('show')
+//     let newBtn = btn.target.nextElementSibling
+//     newBtn.classList.toggle('show')    
+// }
 
 
 
-const editStateMainMenu = () => {
-    header.classList.toggle('header_close')
-    header.classList.toggle('header_open')
-}
+// const editStateMainMenu = () => {
+//     header.classList.toggle('header_close')
+//     header.classList.toggle('header_open')
+// }
 
 
-const indexInit = () => {
-    // addBtnCartPosition = document.querySelector('.cards__add');
-    burgerBtn = document.querySelector('.menu__burger');
-    menuContainer = document.querySelector('.menu__list');
-    addProductInCartBtns = document.querySelectorAll('.cards__add')
+// const indexInit = () => {
+//     // addBtnCartPosition = document.querySelector('.cards__add');
+//     burgerBtn = document.querySelector('.menu__burger');
+//     menuContainer = document.querySelector('.menu__list');
+//     addProductInCartBtns = document.querySelectorAll('.cards__add')
 
-    // addBtnCartPosition.addEventListener('click', upProduct)
-    burgerBtn.addEventListener('click', editMenu)
+//     // addBtnCartPosition.addEventListener('click', upProduct)
+//     burgerBtn.addEventListener('click', editMenu)
 
-    for (let btn of addProductInCartBtns) {
-        btn.addEventListener('click', editViewAddBtn)
-    }
-}
+//     for (let btn of addProductInCartBtns) {
+//         btn.addEventListener('click', editViewAddBtn)
+//     }
+// }
 
 
 // const cartInit = () => {
@@ -119,14 +91,12 @@ const indexInit = () => {
 //     }
 // }
 
-const adminInit = () => {
-    burgerBtn = document.querySelector('.header__burger');
-    header = document.querySelector('.header');
+// const adminInit = () => {
+//     burgerBtn = document.querySelector('.header__burger');
+//     header = document.querySelector('.header');
 
-    burgerBtn.addEventListener('click', editStateMainMenu)
-}
-
-
+//     burgerBtn.addEventListener('click', editStateMainMenu)
+// }
 
 
 
@@ -136,17 +106,19 @@ const adminInit = () => {
 
 
 
-async function editAmountCountInCart(elem) {
-    let parent = elem.target.closest('li')
-    let counter = parent.querySelector('.cards__count')
-    let amount = counter.querySelector('.cards__amount')
-    let buyBtn = parent.querySelector('.cards__add')
-    let upBtn = counter.querySelector('.cards__up')
-    let downBtn = counter.querySelector('.cards__down')
-    let message = page.doc.querySelector('.notifications')
+
+
+// async function editAmountCountInCart(elem) {
+//     let parent = elem.target.closest('li')
+//     let counter = parent.querySelector('.cards__count')
+//     let amount = counter.querySelector('.cards__amount')
+//     let buyBtn = parent.querySelector('.cards__add')
+//     let upBtn = counter.querySelector('.cards__up')
+//     let downBtn = counter.querySelector('.cards__down')
+//     let message = page.doc.querySelector('.notifications')
 
     
-};
+// };
 
 
 
@@ -249,7 +221,7 @@ async function editAmountPositionInCart(elem) {
 function main() {
     startData = {
         'cart': cartInit,
-        'admin': adminInit,
+        // 'admin': adminInit,
         'products': productsInit
     }
 

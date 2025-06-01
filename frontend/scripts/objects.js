@@ -1,8 +1,10 @@
+SERVER = 'http://localhost:8000/'
+
 class Page{
     constructor() {
         this.objects = {}
         this.pageName = document.querySelector('meta[name="pagename"]').content;
-        this.doc = document.querySelector('.body')
+        this.updateDoc()
     }
 
 
@@ -10,6 +12,10 @@ class Page{
         this.objects[name] = elem
         console.dir(this.objects)
 
+    }
+
+    updateDoc() {
+        this.doc = document.querySelector('.body')
     }
 
     
@@ -55,7 +61,6 @@ class Cart{
 
 
     addProduct(article, amount) {
-        console.log(`add product ${this.products}`)
         let item = this.products.find(obj => obj.hasOwnProperty(article));
 
         if (item) {
@@ -74,20 +79,92 @@ class Cart{
             this.editAmountInIcon(-1)
         }
     }
+
+    sendCart() {
+        let products = this.products
+        this.products = []
+        request(
+
+        )
+    }
 }
 
 
 class Card{
-    constructor(cardClassName){
-        let baseClass = cardClassName.match(/([a-zA-Z0-9]+)(?=__)/)[0]
-        this.cardCounter = document.querySelector('.header__num');
-        if (localStorage.getItem('cart')) {
-            this.products = localStorage.getItem('cart')
-        } else {
-            this.products = [];
-        }
+    constructor(containerClassName, productData){
+
+        // console.log(this.products)
+
+        // let product_id = products
+        // let container = pa
+        // this.cardCounter = document.querySelector('.header__num');
+        // if (localStorage.getItem('cart')) {
+        //     this.products = localStorage.getItem('cart')
+        // } else {
+        //     this.products = [];
+        // }
+        this.baseClass = containerClassName
+        this.container = document.querySelector(`.${this.baseClass}`)
+        this.data = productData
+        this.create()
     }
 
+    create(){
+        let card = document.createElement('li')
+        let imageContainer = document.createElement('div')
+        let image = document.createElement('img')
+        let title = document.createElement('h3')
+        let price = document.createElement('span')
+        let counter = document.createElement('div')
+        let buyBtn = document.createElement('button')
+        let upBtn = document.createElement('button')
+        let downBtn = document.createElement('button')
+        let amount = document.createElement('input')
+
+        card.classList.add(`${this.baseClass}__item`)
+        imageContainer.classList.add(`${this.baseClass}__image`)
+        title.classList.add(`${this.baseClass}__title`)
+        price.classList.add(`${this.baseClass}__price`)
+        counter.classList.add(`${this.baseClass}__count`)
+        buyBtn.classList.add(`${this.baseClass}__add`)
+        upBtn.classList.add(`${this.baseClass}__up`)
+        downBtn.classList.add(`${this.baseClass}__down`)
+        amount.classList.add(`${this.baseClass}__amount`)
+
+        card.dataset.article = this.data.article
+        // image.setAttribute('src', `${SERVER}static/${data.image}`)
+        image.setAttribute('alt', this.data.title)
+        title.innerHTML = this.data.title
+        price.innerHTML = this.data.price
+        buyBtn.classList.add(`${this.baseClass}__add`)
+        buyBtn.classList.add('show')
+        buyBtn.innerHTML = 'Купить'
+        // buyBtn.setAttribute('type', 'button')
+        upBtn.setAttribute('type', 'button')
+        downBtn.setAttribute('type', 'button')
+        upBtn.innerHTML = '+'
+        downBtn.innerHTML = '-'
+        amount.setAttribute('value', '0')
+        amount.setAttribute('name', 'product_amount')
+
+        imageContainer.appendChild(image)
+
+        counter.appendChild(downBtn)
+        counter.appendChild(amount)
+        counter.appendChild(upBtn)
+        
+
+        card.appendChild(imageContainer)
+        card.appendChild(title)
+        card.appendChild(price)
+        card.appendChild(buyBtn)
+        card.appendChild(counter)
+
+
+        this.container.appendChild(card)
+
+        return card
+    }
 
     editAmountInIcon(value) {
         let newValue = Number(this.cardCounter.innerHTML) + value;
@@ -115,6 +192,21 @@ class Card{
             this.editAmountInIcon(-1)
         }
         localStorage.setItem('cart', JSON.stringify(this.products))
+    }
+}
+
+
+class Menu{
+    constructor(containerClassName) {
+        this.nav = document.querySelector(`.${containerClassName}`)
+        this.burger = this.nav.querySelector(`.${containerClassName}__burger`)
+        this.list = this.nav.querySelector(`.${containerClassName}__list`)
+    }
+}
+
+class TopMenu extends Menu {
+    editState() {
+        this.list.classList.toggle('show')
     }
 }
 
