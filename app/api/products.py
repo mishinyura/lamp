@@ -19,11 +19,11 @@ async def get_product_list(session: AsyncSession = Depends(get_session)):
     return products
 
 
-@product_router.get('/{order_id}', response_model=ProductSchema)
-async def get_product(order_id: int, session: AsyncSession = Depends(get_session)):
+@product_router.get('/{product_id}', response_model=ProductSchema)
+async def get_product(product_id: int, session: AsyncSession = Depends(get_session)):
     """Получение товара по идентификатору"""
     try:
-        product = await product_service.get_product(order_id, session)
+        product = await product_service.get_product(product_id, session)
     except NotFoundException as ex:
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail=str(ex))
     return product

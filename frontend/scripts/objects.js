@@ -38,6 +38,133 @@ class Notification{
     }
 }
 
+async function login(username, password) {
+    const res = await fetch(`${SERVER}/auth/login`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({username, password})
+    });
+    const data = await res.json();
+    if (data.access_token) {
+        localStorage.setItem('token', data.access_token);
+        return true;
+    }
+    return false;
+}
+
+async function request(url, method = "GET", body = null) {
+    const token = localStorage.getItem('token');
+    const headers = {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: "Bearer " + token })
+    };
+    const res = await fetch(url, {
+        method,
+        headers,
+        ...(body ? { body: JSON.stringify(body) } : {})
+    });
+    if (!res.ok) {
+        throw new Error('Ошибка запроса: ' + res.status);
+    }
+    return await res.json();
+}
+
+
+class Admin {
+    constructor(containerClassName) {
+        this.baseClassMenu = containerClassName
+        this.container = document.querySelector(`.${this.baseClassMenu}__list`)
+    }
+
+    async generateItems() {
+        try {
+            const items = await request(`${SERVER}/products`);
+            this.container.innerHTML = ''; // очищаем список перед вставкой новых элементов
+            for (let data of items) {
+                const item = new ProductItem(this.baseClassMenu);
+                item.createElement(data);
+                this.container.appendChild(item.item);
+            }
+        } catch (err) {
+            this.container.innerHTML = `<div class="error">Ошибка загрузки данных</div>`;
+            console.error(err);
+        }
+    }
+
+    transitionPage() {
+
+    }
+
+    async login(username, password) {
+        const res = await fetch('/auth/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username, password})
+        });
+        const data = await res.json();
+        if (data.access_token) {
+            localStorage.setItem('token', data.access_token);
+        }
+    }
+}
+
+class ProductItem {
+    constructor(containerClassName) {
+        this.baseClassList = containerClassName
+        this.container = document.querySelector(`.${this.baseClassList}__list`)
+    }
+
+    createElement(data) {
+        this.item = document.createElement('li');
+
+        this.info = document.createElement('div');
+        this.control = document.createElement('div');
+
+        this.item_id = document.createElement('span');
+        this.link = document.createElement('a');
+        this.name = document.createElement('span');
+
+        this.editBtn = document.createElement('a');
+        this.delBtn = document.createElement('a');
+
+        this.item.classList.add(`${this.baseClassList}__item`);
+        this.info.classList.add(`${this.baseClassList}__info`);
+        this.control.classList.add(`${this.baseClassList}__control`);
+        this.item_id.classList.add(`${this.baseClassList}__id`);
+        this.link.classList.add(`${this.baseClassList}__link`);
+        this.name.classList.add(`${this.baseClassList}__name`);
+        this.editBtn.classList.add(`${this.baseClassList}__btn`, `${this.baseClassList}__btn_edit`);
+        this.delBtn.classList.add(`${this.baseClassList}__btn`, `${this.baseClassList}__btn_delete`);
+
+        // Заполняем содержимое
+        this.item_id.textContent = data.id;
+        this.link.textContent = data.title || data.name || "Запись";
+        this.link.setAttribute('href', `${SERVER}/products/${data.id}`);
+        this.name.textContent = data.title || data.name || "";
+
+        this.editBtn.textContent = "✏️ Редактировать";
+        this.editBtn.setAttribute('href', `${SERVER}/admin-edit/${data.id}`);
+
+        this.delBtn.textContent = "🗑️ Удалить";
+        this.delBtn.setAttribute('href', "#");
+        this.delBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            // тут можно реализовать запрос на удаление записи
+            alert('Удалить запись ' + data.id);
+        });
+
+        this.info.appendChild(this.item_id);
+        this.info.appendChild(this.link);
+        this.info.appendChild(this.name);
+
+        this.control.appendChild(this.editBtn);
+        this.control.appendChild(this.delBtn);
+
+        this.item.appendChild(this.info);
+        this.item.appendChild(this.control);
+    }
+}
+
 
 class Cart{
     constructor(){

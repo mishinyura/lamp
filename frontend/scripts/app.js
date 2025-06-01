@@ -220,8 +220,8 @@ let modals = document.querySelectorAll('.modals__modal');
 
 function main() {
     startData = {
-        'cart': cartInit,
-        // 'admin': adminInit,
+        // 'cart': cartInit,
+        'admin': adminInit,
         'products': productsInit
     }
 

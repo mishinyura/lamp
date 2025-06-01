@@ -34,3 +34,12 @@ const cartInit = () => {
     //     btn.addEventListener('click', editAmountPositionInCart)
     // } 
 }
+
+async function adminInit() {
+    let products = await request(
+        `${SERVER}/products`
+    )
+
+    const admin = new Admin("cards"); // если контейнер .admin__list
+    await admin.generateItems();
+}
