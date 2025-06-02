@@ -1,0 +1,13 @@
+[order_service]
+app_version='1.0.0'
+app_name='order_service'
+app_host='localhost'
+app_port=8002
+app_mount='/api/v1'
+
+[db_settings]
+db_name='lamp_db'
+db_user='postgres'
+db_password='boss'
+db_host='localhost'
+db_port=5432
