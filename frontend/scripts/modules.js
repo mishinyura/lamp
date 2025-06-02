@@ -18,3 +18,8 @@ async function request(path='/', method='GET', body={}) {
     console.error('Ошибка:', error);
   }
 }
+
+
+function print(data) {
+    console.log(data)
+}

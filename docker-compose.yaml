@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: ./order_service
+    container_name: order_service
+    ports:
+      - "8000:8000"
+    restart: always
+
+  admin_app:
+    build:
+      context: ./admin_service
+    container_name: admin_service
+    ports:
+      - "8001:8001"
+    restart: always
+

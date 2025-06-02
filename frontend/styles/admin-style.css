@@ -132,7 +132,14 @@
 .cards__item:not(:last-child){
     margin-bottom: 10px;
 }
-.cards__article{
+.cards__id{
+    margin-right: 10px;
+    font-family: "Montserrat";
+    font-size: 20px;
+    font-weight: 600;
+    font-style: normal;
+}
+.cards__link{
     margin-right: 10px;
     font-family: "Montserrat";
     font-size: 20px;
