@@ -11,6 +11,6 @@ RUN poetry config virtualenvs.create false \
 
 COPY . /app
 
-EXPOSE 8001
+EXPOSE 8003
 
-CMD ["uvicorn", "admin_service.core.app:get_app", "--factory", "--host", "0.0.0.0", "--port", "8001"]
+CMD ["uvicorn", "product_service.core.app:get_app", "--factory", "--host", "0.0.0.0", "--port", "8003"]
