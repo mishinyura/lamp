@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from jose import jwt, JWTError
 from fastapi.security import OAuth2PasswordRequestForm
 
-from admin_service.app.core.security import create_access_token, authenticate_admin, oauth2_scheme, get_admin, SECRET_KEY, \
+from app.core.security import create_access_token, authenticate_admin, oauth2_scheme, get_admin, SECRET_KEY, \
     ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 
 auth_router = APIRouter()

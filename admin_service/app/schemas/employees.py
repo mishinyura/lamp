@@ -1,6 +1,6 @@
 from pydantic import BaseModel, ConfigDict
 
-from admin_service.app.core.enums import EmployeeRole, EmployeeStatus
+from app.core.enums import EmployeeRole, EmployeeStatus
 
 
 class EmployeeSchema(BaseModel):

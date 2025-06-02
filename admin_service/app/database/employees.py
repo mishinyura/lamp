@@ -4,10 +4,10 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import SQLAlchemyError
 
-from admin_service.app.core.exceptions import SqlException
-from admin_service.app.models import EmployeeModel
-from admin_service.app.schemas import EmployeeSchema
-from admin_service.app.database.base_crud import BaseCrud
+from app.core.exceptions import SqlException
+from app.models import EmployeeModel
+from app.schemas import EmployeeSchema
+from app.database.base_crud import BaseCrud
 
 
 class EmployeeCRUD(BaseCrud, ABC):

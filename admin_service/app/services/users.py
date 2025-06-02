@@ -1,9 +1,9 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from order_service.database import user_crud
-from order_service.schemas import UserSchema, UserCreateSchema
-from order_service.models import UserModel
-from order_service.core.exceptions import SqlException, DuplicateException
+from app.database import user_crud
+from app.schemas import UserSchema, UserCreateSchema
+from app.models import UserModel
+from app.core.exceptions import SqlException, DuplicateException
 
 
 class UserService:
@@ -36,4 +36,4 @@ class UserService:
             raise DuplicateException(message=str(ex))
 
 
-user_service = UserService()
+user_srv = UserService()

@@ -1,5 +1,7 @@
-from .employees import employee_service
+from .employees import employee_srv
+from .users import user_srv
 
 __all__ = [
-    'employee_service'
+    'employee_srv',
+    'user_srv'
 ]

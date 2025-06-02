@@ -2,9 +2,9 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
-from admin_service.app.api import auth_router
-from admin_service.app.core.config import settings
-from admin_service.app.core.db import create_tables
+from app.api import auth_router
+from app.core.config import settings, static_path
+from app.core.db import create_tables
 
 ROUTES = {
     '/admin': auth_router,
@@ -22,7 +22,8 @@ def get_app():
     app = FastAPI(title='Admin')
     set_routes(app)
     app.mount(settings.admin_app.app_mount, app)
-    app.mount("/static", StaticFiles(directory="static"), name="static")
+    print("STATIC PATH:", static_path)
+    app.mount("/static", StaticFiles(directory=static_path), name="static")
 
     app.add_middleware(
         CORSMiddleware,

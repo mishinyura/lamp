@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from admin_service.app.database import employee_crud
-from admin_service.app.schemas import EmployeeSchema
+from app.database import employee_crud
+from app.schemas import EmployeeSchema
 
 
 class EmployeeService:
@@ -13,4 +13,4 @@ class EmployeeService:
         return employee
 
 
-employee_service = EmployeeService()
+employee_srv = EmployeeService()
