@@ -2,9 +2,9 @@ from sqlalchemy import inspect
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 
-from order_service.models.base import Base
-from order_service.models import users, orders, orders_products, products
-from order_service.core.config import settings
+from product_service.models.base import Base
+from product_service.models import products
+from product_service.core.config import settings
 
 
 engine = create_async_engine(

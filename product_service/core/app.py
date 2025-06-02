@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
-from product_service.api import order_router, product_router
+from product_service.api import product_router
 from product_service.core.config import settings
 from product_service.core.db import create_tables
 

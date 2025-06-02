@@ -7,7 +7,7 @@ import os
 from product_service.schemas import ProductSchema, ProductCreateSchema, ProductAddCartSchema
 from product_service.core.exceptions import DuplicateException, NotFoundException
 from product_service.core.db import get_session
-from product_service.services import product_service
+from product_service.services import product_srv
 
 product_router = APIRouter()
 
@@ -15,7 +15,7 @@ product_router = APIRouter()
 @product_router.get('/', response_model=list[ProductSchema])
 async def get_product_list(session: AsyncSession = Depends(get_session)):
     """Получение всех доступных товаров в магазине"""
-    products = await product_service.get_all_products(session=session)
+    products = await product_srv.get_all_products(session=session)
     return products
 
 
@@ -23,7 +23,7 @@ async def get_product_list(session: AsyncSession = Depends(get_session)):
 async def get_product(product_id: int, session: AsyncSession = Depends(get_session)):
     """Получение товара по идентификатору"""
     try:
-        product = await product_service.get_product(product_id, session)
+        product = await product_srv.get_product(product_id, session)
     except NotFoundException as ex:
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail=str(ex))
     return product
@@ -33,7 +33,7 @@ async def get_product(product_id: int, session: AsyncSession = Depends(get_sessi
 async def create_product(product_data: ProductCreateSchema, session: AsyncSession = Depends(get_session)):
     """Добавление нового товара в магазин"""
     try:
-        await product_service.create_product(product_data=product_data, session=session)
+        await product_srv.create_product(product_data=product_data, session=session)
     except DuplicateException as ex:
         raise HTTPException(status_code=HTTP_409_CONFLICT, detail=str(ex))
     return Response(status_code=HTTP_201_CREATED)
@@ -44,7 +44,7 @@ async def product_availability(
         product_data: ProductAddCartSchema, session: AsyncSession = Depends(get_session)
 ):
     """Проверка наличия нужного количества товара на складе"""
-    permission = await product_service.check_availability_product(
+    permission = await product_srv.check_availability_product(
         product_data=product_data, session=session
     )
 
@@ -67,7 +67,7 @@ async def product_edit(
 ):
     """Замена всех параметров товара"""
     try:
-        await product_service.update_product_data(product_id, product_data, session)
+        await product_srv.update_product_data(product_id, product_data, session)
     except NotFoundException as ex:
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail=str(ex))
     return Response(status_code=HTTP_204_NO_CONTENT)
@@ -77,7 +77,7 @@ async def product_edit(
 async def product_delete(product_id: int, session: AsyncSession = Depends(get_session)):
     """Удаление товара из магазина"""
     try:
-        await product_service.remove_product_from_store(product_id, session)
+        await product_srv.remove_product_from_store(product_id, session)
     except NotFoundException as ex:
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail=str(ex))
     return Response(status_code=HTTP_204_NO_CONTENT)
