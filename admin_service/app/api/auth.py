@@ -2,14 +2,10 @@ from datetime import timedelta
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from jose import jwt, JWTError
-from sqlalchemy.ext.asyncio import AsyncSession
-from starlette.status import HTTP_409_CONFLICT, HTTP_201_CREATED, HTTP_404_NOT_FOUND
 from fastapi.security import OAuth2PasswordRequestForm
 
-from admin_service.core.security import create_access_token, authenticate_admin, oauth2_scheme, get_admin, SECRET_KEY, \
+from admin_service.app.core.security import create_access_token, authenticate_admin, oauth2_scheme, get_admin, SECRET_KEY, \
     ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
-from admin_service.core.db import get_session
-from admin_service.core.exceptions import DuplicateException
 
 auth_router = APIRouter()
 

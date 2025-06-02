@@ -2,9 +2,9 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
-from admin_service.api import auth_router
-from admin_service.core.config import settings
-from admin_service.core.db import create_tables
+from admin_service.app.api import auth_router
+from admin_service.app.core.config import settings
+from admin_service.app.core.db import create_tables
 
 ROUTES = {
     '/admin': auth_router,
