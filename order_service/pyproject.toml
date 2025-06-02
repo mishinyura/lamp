@@ -5,7 +5,7 @@ description = ""
 authors = [
     {name = "Yura Mishin",email = "robothot@yandex.ru"}
 ]
-readme = "README.md"
+#readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "uvicorn (>=0.34.3,<0.35.0)",
