@@ -4,7 +4,7 @@ from datetime import datetime
 
 from order_service.core.enums import OrderStatus
 from order_service.schemas.products import ProductAddCartSchema
-from order_service.schemas.users import UserCreateSchema
+from app.schemas.users import UserCreateSchema
 
 
 class OrderSchema(BaseModel):

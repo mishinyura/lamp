@@ -4,10 +4,10 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import SQLAlchemyError
 
-from order_service.core.exceptions import SqlException
-from order_service.models import UserModel
-from order_service.schemas import UserSchema, UserCreateSchema
-from order_service.database.base_crud import BaseCrud
+from order_service.app.core.exceptions import SqlException
+from order_service.app.models import UserModel
+from order_service.app.schemas import UserSchema
+from order_service.app.database.base_crud import BaseCrud
 
 
 class UserCRUD(BaseCrud, ABC):

@@ -1,6 +1,5 @@
 from .orders import OrderSchema, OrderCreateSchema
-from .products import ProductSchema, ProductCreateSchema, ProductAddCartSchema
-from .users import UserSchema, UserCreateSchema
+from app.schemas.users import UserSchema, UserCreateSchema
 
 __all__ = [
     'OrderSchema',

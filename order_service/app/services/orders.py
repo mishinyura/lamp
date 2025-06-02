@@ -1,13 +1,11 @@
-from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import datetime
 
-from order_service.core.db import get_session
-from order_service.database import user_crud, order_crud
-from order_service.schemas import OrderSchema, OrderCreateSchema, UserCreateSchema
-from order_service.models import OrderModel, OrderToProductModel, UserModel
+from order_service.database import order_crud
+from order_service.schemas import OrderSchema, OrderCreateSchema
+from order_service.models import OrderModel, OrderToProductModel
 from order_service.core.exceptions import SqlException, DuplicateException
-from order_service.services.users import user_service
+from app.services.users import user_service
 from order_service.services.prodcuts import product_service
 from order_service.core.enums import OrderStatus
 

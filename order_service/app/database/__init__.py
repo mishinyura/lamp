@@ -1,6 +1,6 @@
 from .orders import order_crud
 from .products import product_crud
-from .users import user_crud
+from app.database.users import user_crud
 
 
 __all__ = [
