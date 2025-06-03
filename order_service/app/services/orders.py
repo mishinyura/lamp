@@ -1,13 +1,13 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import datetime
 
-from order_service.database import order_crud
-from order_service.schemas import OrderSchema, OrderCreateSchema
-from order_service.models import OrderModel, OrderToProductModel
-from order_service.core.exceptions import SqlException, DuplicateException
+from app.database import order_crud
+from app.schemas import OrderSchema, OrderCreateSchema
+from app.models import OrderModel, OrderToProductModel
+from app.core.exceptions import SqlException, DuplicateException
 from app.services.users import user_service
-from order_service.services.prodcuts import product_service
-from order_service.core.enums import OrderStatus
+from app.services import product_service
+from app.core.enums import OrderStatus
 
 
 class OrderService:
@@ -64,4 +64,4 @@ class OrderService:
             return order.id
 
 
-order_service = OrderService()
+order_srv = OrderService()

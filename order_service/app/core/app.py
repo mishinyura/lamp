@@ -2,9 +2,9 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
-from order_service.api import order_router, product_router
-from order_service.core.config import settings
-from order_service.core.db import create_tables
+from order_service.app.api import order_router, product_router
+from order_service.app.core.config import settings
+from order_service.app.core.db import create_tables
 
 ROUTES = {
     '/orders': order_router,

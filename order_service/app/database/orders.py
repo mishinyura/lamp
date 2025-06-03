@@ -1,13 +1,13 @@
 from abc import ABC
 
-from sqlalchemy import select, update
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import SQLAlchemyError
 
-from order_service.core.exceptions import SqlException
-from order_service.models.orders import OrderModel
-from order_service.schemas.orders import OrderSchema
-from order_service.database.base_crud import BaseCrud
+from app.core.exceptions import SqlException
+from app.models.orders import OrderModel
+from app.schemas.orders import OrderSchema
+from app.database.base_crud import BaseCrud
 
 
 class OrderCrud(BaseCrud, ABC):

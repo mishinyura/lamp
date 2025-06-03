@@ -2,8 +2,8 @@ from sqlalchemy import ForeignKey, Numeric, DateTime, Integer, Enum as AlchemyEn
 from sqlalchemy.orm import Mapped, mapped_column
 from datetime import datetime
 
-from order_service.models.base import BaseModel, Base
-from order_service.core.enums import OrderStatus
+from app.models.base import BaseModel, Base
+from app.core.enums import OrderStatus
 
 
 class OrderModel(BaseModel, Base):

@@ -2,8 +2,8 @@ from pydantic import BaseModel, ConfigDict
 from decimal import Decimal
 from datetime import datetime
 
-from order_service.core.enums import OrderStatus
-from order_service.schemas.products import ProductAddCartSchema
+from app.core.enums import OrderStatus
+from app.schemas import ProductAddCartSchema
 from app.schemas.users import UserCreateSchema
 
 

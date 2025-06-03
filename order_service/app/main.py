@@ -1,7 +1,7 @@
 import uvicorn
 
-from order_service.core.config import settings
-from order_service.core.app import get_app
+from order_service.app.core.config import settings
+from order_service.app.core.app import get_app
 
 
 if __name__ == '__main__':
