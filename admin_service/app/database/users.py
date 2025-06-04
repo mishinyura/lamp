@@ -4,10 +4,10 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import SQLAlchemyError
 
-from order_service.app.core.exceptions import SqlException
-from order_service.app.models import UserModel
-from order_service.app.schemas import UserSchema
-from order_service.app.database.base_crud import BaseCrud
+from app.core.exceptions import SqlException
+from app.models import UserModel
+from app.schemas import UserSchema
+from app.database.base_crud import BaseCrud
 
 
 class UserCRUD(BaseCrud, ABC):
@@ -19,7 +19,7 @@ class UserCRUD(BaseCrud, ABC):
             await session.rollback()
             raise SqlException(message=str(exc))
 
-    async def read(self, user_id: int, session: AsyncSession):
+    async def get(self, user_id: int, session: AsyncSession):
         result = await session.execute(select(UserModel).where(UserModel.id == user_id))
         user = result.scalar_one_or_none()
         return UserSchema.model_validate(user)

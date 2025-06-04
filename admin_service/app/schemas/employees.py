@@ -14,6 +14,12 @@ class EmployeeSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
+class EmployeeCreateSchema(BaseModel):
+    name: str
+    username: str
+    password: str
+
+
 class EmployeeLoginSchema:
     username: str
     password: str

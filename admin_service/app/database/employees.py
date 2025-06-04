@@ -19,9 +19,11 @@ class EmployeeCRUD(BaseCrud, ABC):
             await session.rollback()
             raise SqlException(message=str(exc))
 
-    async def get(self, employee_id: int, session: AsyncSession):
-        result = await session.execute(select(EmployeeModel).where(EmployeeModel.id == employee_id))
+    async def get(self, username: int, session: AsyncSession):
+        result = await session.execute(select(EmployeeModel).where(EmployeeModel.username == username))
         employee = result.scalar_one_or_none()
+        if not employee:
+            raise SqlException(message='Not found')
         return EmployeeSchema.model_validate(employee)
 
     async def update(self, employee_id: int, data: dict, session: AsyncSession) -> None:
