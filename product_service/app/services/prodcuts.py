@@ -1,10 +1,10 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 
-from product_service.database import product_crud
-from product_service.schemas import ProductSchema, ProductCreateSchema, ProductAddCartSchema
-from product_service.models import ProductModel
-from product_service.core.exceptions import SqlException, DuplicateException, NotFoundException
+from app.database import product_crud
+from app.schemas import ProductSchema, ProductCreateSchema, ProductAddCartSchema
+from app.models import ProductModel
+from app.core.exceptions import SqlException, DuplicateException, NotFoundException
 
 
 class ProductService:
