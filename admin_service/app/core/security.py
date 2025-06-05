@@ -1,63 +1,72 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from sqlalchemy.ext.asyncio import AsyncSession
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 
-SECRET_KEY = "supersecretkey"  # Лучше вынести в .env!
+from app.database import employee_crud
+from app.core.db import get_session
+
+# Константы конфигурации (секретный ключ, алгоритм, время жизни токена)
+SECRET_KEY = "supersecretkey"  # Лучше хранить в .env
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-fake_admin_db = {
-    "admin": {
-        "username": "admin",
-        "hashed_password": "$2b$12$KpwJZ5QbdFEOQHK5iHsg2.enQ20O.467wdXHjAhN8Tm0WPvpti.Hm", # password: admin123
-    }
-}
+# Имитация базы данных админов
+# fake_admin_db = {
+#     "admin": {
+#         "username": "admin",
+#         "hashed_password": "$2b$12$KpwJZ5QbdFEOQHK5iHsg2.enQ20O.467wdXHjAhN8Tm0WPvpti.Hm",  # admin123
+#     }
+# }
 
+# Контекст для хэширования и проверки паролей
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+# Настройка схемы аутентификации OAuth2 (по токену)
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="admin/login")
 
 
-def verify_password(plain_password, hashed_password):
-    from passlib.context import CryptContext
-    pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-    try:
-        result = pwd_context.verify(plain_password, hashed_password)
-        print("verify result:", result)
-        return result
-    except Exception as e:
-        print("Verify exception:", e)
-        return False
+# Проверка пароля: plain_password — введённый пароль, hashed_password — из базы
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return pwd_context.verify(plain_password, hashed_password)
 
 
-def get_admin(username: str):
-    admin = fake_admin_db.get(username)
-    return admin
-
-
-def authenticate_admin(username: str, password: str):
-    admin = get_admin(username)
-    print("admin:", admin)
-    print("username from input:", username)
-    print("password from input:", password)
+# Аутентификация администратора: проверка наличия и пароля
+async def authenticate_admin(username: str, password: str, session: AsyncSession):
+    admin = await employee_crud.get(username=username, session=session)
+    print('ADMIN', admin.username)
     if not admin:
-        print("no such admin")
         return False
-    if not verify_password(password, admin["hashed_password"]):
-        print("Password verification failed")
-        print("password:", password)
-        print("hashed_password:", admin["hashed_password"])
+    if not verify_password(password, admin.hash_password):
         return False
-    print("Password correct")
     return admin
 
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode = data.copy()
-    if expires_delta:
-        expire = datetime.utcnow() + expires_delta
-    else:
-        expire = datetime.utcnow() + timedelta(minutes=15)
+    expire = datetime.utcnow() + (expires_delta or timedelta(minutes=15))
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+
+async def get_current_admin(token: str = Depends(oauth2_scheme), session: AsyncSession = Depends(get_session)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        print('ADMIN1', payload)
+        if username is None:
+            raise credentials_exception
+    except JWTError:
+        raise credentials_exception
+    admin = await employee_crud.get(username=username, session=session)
+    print('ADMIN1', admin)
+    if admin is None:
+        raise credentials_exception
+    return admin
