@@ -2,12 +2,13 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import auth_router
+from app.api import auth_router, user_router
 from app.core.config import settings, static_path
 from app.core.db import create_tables
 
 ROUTES = {
     '/admin': auth_router,
+    '/users': user_router
 }
 
 

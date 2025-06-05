@@ -9,6 +9,6 @@ class UserSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
-class UserCreateSchema:
+class UserCreateSchema(BaseModel):
     name: str
     phone: str

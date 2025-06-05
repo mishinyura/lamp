@@ -22,6 +22,15 @@ class UserService:
         users = await self.crud.read_all(session=session)
         return users
 
+    async def get_or_create_user(self, user_data: UserCreateSchema, session: AsyncSession):
+        user = await self.get_user_by_user_phone(user_phone=user_data.phone, session=session)
+        print('US', user)
+        if not user:
+            user_id = await self.create_user(user_data=user_data, session=session)
+            print('CREATED', user_id)
+            user = await self.crud.get(user_id=user_id, session=session)
+        return user
+
     async def create_user(
             self, user_data: UserCreateSchema, session: AsyncSession
     ) -> int:

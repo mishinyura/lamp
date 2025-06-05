@@ -22,7 +22,7 @@ def get_app():
     app = FastAPI(title='Lamp')
     set_routes(app)
     app.mount(settings.app.app_mount, app)
-    app.mount("/static", StaticFiles(directory="static"), name="static")
+    # app.mount("/static", StaticFiles(directory="static"), name="static")
 
     app.add_middleware(
         CORSMiddleware,

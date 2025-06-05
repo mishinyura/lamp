@@ -6,6 +6,7 @@ from app.schemas import OrderSchema, OrderCreateSchema
 from app.models import OrderModel, OrderToProductModel
 from app.core.exceptions import SqlException, DuplicateException
 from app.core.enums import OrderStatus
+from app.clients import user_client, product_client
 
 
 class OrderService:
@@ -24,42 +25,37 @@ class OrderService:
             self, order_data: OrderCreateSchema, session: AsyncSession
     ):
         """Ищем пользователя по номеру телефона"""
-        user = await user_service.get_user_by_user_phone(
-            user_phone=order_data.user.phone,
-            session=session
+        user = await user_client.get_user_by_phone(
+            name=order_data.user.name,
+            phone=order_data.user.phone
         )
-
-        if not user:
-            user_id = user_service.create_user(order_data.user)
-        else:
-            user_id = user.id
 
         """Создаем моедль заказа"""
         order = OrderModel(
             user_id=user_id,
             status=OrderStatus.PENDING,
-            total=product_service.get_sum_products(order_data.products),
+            total=product_client.get_sum_products(order_data.products),
             created_at=datetime.now()
         )
-
-        try:
-            await self.crud.create(order=order, session=session)
-        except SqlException as ex:
-            await session.rollback()
-            raise DuplicateException(message=str(ex))
-        else:
-            for item in order_data.products:
-                product = await product_service.get_product_by_article(item.article, session)
-
-                order_products = OrderToProductModel(
-                    order_id=order.id,
-                    product_id=product.id,
-                    quantity=item.amount,
-                )
-
-                await self.crud.create()
-
-            return order.id
+    #
+    #     try:
+    #         await self.crud.create(order=order, session=session)
+    #     except SqlException as ex:
+    #         await session.rollback()
+    #         raise DuplicateException(message=str(ex))
+    #     else:
+    #         for item in order_data.products:
+    #             product = await product_service.get_product_by_article(item.article, session)
+    #
+    #             order_products = OrderToProductModel(
+    #                 order_id=order.id,
+    #                 product_id=product.id,
+    #                 quantity=item.amount,
+    #             )
+    #
+    #             await self.crud.create()
+    #
+    #         return order.id
 
 
 order_srv = OrderService()

@@ -1,5 +1,10 @@
 from dynaconf import Dynaconf
 from pydantic import BaseModel
+from pathlib import Path
+
+
+BASE_DIR = Path(__file__).parent.parent
+static_path = BASE_DIR / "static"
 
 
 class AppConfig(BaseModel):

@@ -34,6 +34,8 @@ class UserCRUD(BaseCrud, ABC):
     async def get_by_phone(cls, user_phone: str, session: AsyncSession) -> UserSchema | None:
         result = await session.execute(select(UserModel).where(UserModel.phone == user_phone))
         user = result.scalar_one_or_none()
+        if not user:
+            return None
         return UserSchema.model_validate(user)
 
     @classmethod
