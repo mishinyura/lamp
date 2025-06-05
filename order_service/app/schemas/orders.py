@@ -3,8 +3,6 @@ from decimal import Decimal
 from datetime import datetime
 
 from app.core.enums import OrderStatus
-from app.schemas import ProductAddCartSchema
-from app.schemas.users import UserCreateSchema
 
 
 class OrderSchema(BaseModel):
@@ -17,9 +15,19 @@ class OrderSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
+class UserInOrder(BaseModel):
+    name: str
+    phone: str
+
+
+class ProductInOrder(BaseModel):
+    article: str
+    amount: int
+
+
 class OrderCreateSchema(BaseModel):
-    user: UserCreateSchema
-    products: list[ProductAddCartSchema]
+    user: UserInOrder
+    products: list[ProductInOrder]
 
     model_config = {
         "arbitrary_types_allowed": True

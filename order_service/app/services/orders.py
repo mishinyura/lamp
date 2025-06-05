@@ -5,8 +5,6 @@ from app.database import order_crud
 from app.schemas import OrderSchema, OrderCreateSchema
 from app.models import OrderModel, OrderToProductModel
 from app.core.exceptions import SqlException, DuplicateException
-from app.services.users import user_service
-from app.services import product_service
 from app.core.enums import OrderStatus
 
 
