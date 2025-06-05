@@ -11,3 +11,7 @@ db_user='postgres'
 db_password='boss'
 db_host='localhost'
 db_port=5432
+
+[api_settings]
+product_api='http://localhost:8003'
+user_api='http://localhost:8001'

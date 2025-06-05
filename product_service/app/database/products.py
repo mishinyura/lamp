@@ -1,13 +1,13 @@
 from abc import ABC
 
-from sqlalchemy import select, update, func
+from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import SQLAlchemyError
 
-from product_service.core.exceptions import SqlException
-from product_service.models import ProductModel
-from product_service.schemas import ProductSchema
-from product_service.database.base_crud import BaseCrud
+from app.core.exceptions import SqlException
+from app.models import ProductModel
+from app.schemas import ProductSchema
+from app.database.base_crud import BaseCrud
 
 
 class ProductCRUD(BaseCrud, ABC):

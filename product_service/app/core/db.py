@@ -1,10 +1,8 @@
 from sqlalchemy import inspect
-from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 
-from product_service.models.base import Base
-from product_service.models import products
-from product_service.core.config import settings
+from app.models.base import Base
+from app.core.config import settings
 
 
 engine = create_async_engine(

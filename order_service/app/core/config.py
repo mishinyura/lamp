@@ -2,6 +2,11 @@ from dynaconf import Dynaconf
 from pydantic import BaseModel
 
 
+class APIConfig(BaseModel):
+    user_api: str
+    product_api: str
+
+
 class AppConfig(BaseModel):
     app_version: str
     app_name: str
@@ -32,6 +37,7 @@ class DBConfig(BaseModel):
 class Settings(BaseModel):
     app: AppConfig
     db: DBConfig
+    api: APIConfig
 
 
 dyna_settings = Dynaconf(
@@ -40,5 +46,6 @@ dyna_settings = Dynaconf(
 
 settings = Settings(
     app=dyna_settings['order_service'],
-    db=dyna_settings['db_settings']
+    db=dyna_settings['db_settings'],
+    api=dyna_settings['api_settings']
 )

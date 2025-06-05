@@ -4,10 +4,10 @@ from starlette.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT,
 from sqlalchemy.ext.asyncio import AsyncSession
 import os
 
-from product_service.schemas import ProductSchema, ProductCreateSchema, ProductAddCartSchema
-from product_service.core.exceptions import DuplicateException, NotFoundException
-from product_service.core.db import get_session
-from product_service.services import product_srv
+from app.schemas import ProductSchema, ProductCreateSchema, ProductAddCartSchema
+from app.core.exceptions import DuplicateException, NotFoundException
+from app.core.db import get_session
+from app.services import product_srv
 
 product_router = APIRouter()
 

@@ -1,8 +1,8 @@
 from sqlalchemy import inspect
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 
-from order_service.app.models.base import Base
-from order_service.app.core.config import settings
+from app.models.base import Base
+from app.core.config import settings
 
 
 engine = create_async_engine(

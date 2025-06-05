@@ -2,9 +2,9 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
-from product_service.api import product_router
-from product_service.core.config import settings
-from product_service.core.db import create_tables
+from app.api import product_router
+from app.core.config import settings, static_path
+from app.core.db import create_tables
 
 ROUTES = {
     '/products': product_router
@@ -22,7 +22,8 @@ def get_app():
     app = FastAPI(title='Lamp')
     set_routes(app)
     app.mount(settings.app.app_mount, app)
-    app.mount("/static", StaticFiles(directory="static"), name="static")
+    print('FFF', static_path)
+    app.mount("/static", StaticFiles(directory=static_path), name="static")
 
     app.add_middleware(
         CORSMiddleware,
