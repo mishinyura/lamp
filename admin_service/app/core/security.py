@@ -6,6 +6,7 @@ from passlib.context import CryptContext
 from datetime import datetime, timedelta
 
 from app.database import employee_crud
+from app.core.db import get_session
 
 # Константы конфигурации (секретный ключ, алгоритм, время жизни токена)
 SECRET_KEY = "supersecretkey"  # Лучше хранить в .env
@@ -50,7 +51,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 
-async def get_current_admin(token: str = Depends(oauth2_scheme)):
+async def get_current_admin(token: str = Depends(oauth2_scheme), session: AsyncSession = Depends(get_session)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -59,12 +60,13 @@ async def get_current_admin(token: str = Depends(oauth2_scheme)):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
+        print('ADMIN1', payload)
         if username is None:
             raise credentials_exception
     except JWTError:
         raise credentials_exception
-    admin = None
-    print('ADMIN1', token)
+    admin = await employee_crud.get(username=username, session=session)
+    print('ADMIN1', admin)
     if admin is None:
         raise credentials_exception
     return admin

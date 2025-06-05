@@ -56,8 +56,6 @@ async def register_employee(
 
 @auth_router.get("/protected")
 async def read_admin(
-        current_admin: dict = Depends(get_current_admin),
-        session: AsyncSession = Depends(get_session)
+        current_admin: dict = Depends(get_current_admin)
 ):
-    print('OJ')
-    return {"msg": f"Hello, {current_admin['username']}! This is the admin area."}
+    return {"msg": f"Hello, {current_admin}! This is the admin area."}
